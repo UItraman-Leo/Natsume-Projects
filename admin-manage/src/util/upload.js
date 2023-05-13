@@ -1,5 +1,11 @@
 import axios from 'axios'
 
+/**
+ * @author: Natsume
+ * @描述:
+ * *参数1:上传地址
+ * *参数2:上传的数据对象
+ */
 function upload(path, userForm) {
     const param = new FormData()
     for (const i in userForm) {

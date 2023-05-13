@@ -13,7 +13,7 @@
           <el-input v-model="newForm.title"/>
         </el-form-item>
         <el-form-item label="内容" prop="content">
-          <editor @content="contentChange"></editor>
+          <Editor @content="contentChange"></Editor>
         </el-form-item>
         <el-form-item label="类型" prop="category">
           <el-select
@@ -55,7 +55,7 @@ import {ref, reactive} from 'vue'
 import upload from "@/util/upload"
 import Up_Load from '@/components/upload/Up_Load.vue'
 import {ElMessage} from 'element-plus'
-import editor from '@/components/editor/editor'
+import Editor from '@/components/editor/Editor.vue'
 
 const newFormRef = ref()
 const newForm = reactive({
@@ -75,7 +75,7 @@ const newFormRules = reactive({
   ],
   content: [
     {required: true, message: '内容', trigger: 'blur'},
-    {min: 1, max: 20, message: 'Length should be 1 to 20', trigger: 'blur'},
+    {min: 1, max: 99999, message: 'Length should be 1 to 20', trigger: 'blur'},
   ],
   category: [
     {required: true, message: '性别', trigger: 'blur'},
@@ -108,21 +108,21 @@ const coverChange = (e) => {
   newForm.file = e
 }
 
-const clickUpload = (e) => {
+const clickUpload = () => {
   newFormRef.value.validate(async (valid) => {
     if (valid) {
-      console.log(newForm)
+      // console.log(newForm)
       await upload('/adminapi/new/add', newForm)
           .then(res => {
             // console.log('上传发送', res.data)
-            if (res.data.ActionType == 'OK') {
+            if (res.data.ActionType === 'OK') {
               ElMessage({
                 message: '编辑成功',
                 type: 'success',
               })
             }
           })
-          .catch(err => {
+          .catch(() => {
             // console.log('上传失败', err)
             ElMessage({
               message: '编辑失败',

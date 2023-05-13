@@ -18,10 +18,10 @@
           <template #default="scope">
             <div style="display: flex; align-items: center">
 
-              <el-tag :type="scope.row.role == 0 ? 'danger' : scope.row.role == 1 ? 'success' : 'info'"
+              <el-tag :type="scope.row.role === 0 ? 'danger' : scope.row.role === 1 ? 'success' : 'info'"
                       class="ml-2">
                 {{
-                  scope.row.role == 0 ? '管理员' : scope.row.role == 1 ? '用户' : '游客'
+                  scope.row.role === 0 ? '管理员' : scope.row.role === 1 ? '用户' : '游客'
                 }}
               </el-tag>
             </div>
@@ -30,7 +30,7 @@
         <el-table-column label="性别" prop="gender" width="120">
           <template #default="scope">
             <div style="display: flex; align-items: center">
-              {{ scope.row.gender == 0 ? '人妖' : scope.row.gender == 1 ? '男' : '女' }}
+              {{ scope.row.gender === 0 ? '人妖' : scope.row.gender === 1 ? '男' : '女' }}
             </div>
           </template>
         </el-table-column>
@@ -136,7 +136,7 @@ const userFormRules = reactive({
     {required: false, message: '头像', trigger: 'blur'},
   ],
 })
-// 性别选择字段
+// 权限
 const options = [
   {
     label: '管理员',
@@ -161,7 +161,7 @@ const getTableData = async () => {
     method: 'get',
   })
   // console.log(res.data.data)
-  if (res.data.ActionType == "OK") {
+  if (res.data.ActionType === "OK") {
     tableData.value = res.data.data
   }
 
@@ -182,7 +182,7 @@ const onUpLoad = () => {
       // 1.往后端发送数据
       const res = await axios.put(`/adminapi/user/put/${userAddForm._id}`, userAddForm)
 
-      if (res.data.ActionType == "OK") {
+      if (res.data.ActionType === "OK") {
         ElMessage({
           message: '修改成功',
           type: 'success',

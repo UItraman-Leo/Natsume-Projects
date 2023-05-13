@@ -1,5 +1,5 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
-import Login from "@/views/Login.vue";
+import Login from "@/views/Welcome.vue";
 import MainBox from "@/views/MainBox.vue";
 import routesConfig from "./config"
 import store from "@/store";
@@ -76,8 +76,8 @@ const ConfigRouter = () => {
 const checkmission = (item) => {
     //4. 判断路由里是否有这个字段，有的则表示需要权限
     if (item.requireAdmin) {
-        //5. 如果是管理员权限就return true
-        return store.state.userInfo.role === '管理员'
+        //5. 如果有这个字段需要判断权限，管理员0 、 游客2返回true，用户1返回false
+        return store.state.userInfo.role === 0||store.state.userInfo.role === 2
     }
     return true
 }

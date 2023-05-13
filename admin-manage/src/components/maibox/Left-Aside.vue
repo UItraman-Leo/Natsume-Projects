@@ -31,8 +31,8 @@
           </el-icon>
           <span>用户管理</span>
         </template>
-        <el-menu-item index="/user-manafe/useradd">添加用户</el-menu-item>
-        <el-menu-item index="/user-manafe/userlist">用户列表</el-menu-item>
+        <el-menu-item index="/user-manage/useradd">添加用户</el-menu-item>
+        <el-menu-item index="/user-manage/userlist">用户列表</el-menu-item>
       </el-sub-menu>
       <!--      文章管理-->
       <el-sub-menu index="/news-manage">
@@ -42,8 +42,8 @@
           </el-icon>
           <span>文章管理</span>
         </template>
-        <el-menu-item index="/news-manafe/newadd">创建文章</el-menu-item>
-        <el-menu-item index="/news-manafe/newlist">文章列表</el-menu-item>
+        <el-menu-item index="/news-manage/newadd">创建文章</el-menu-item>
+        <el-menu-item index="/news-manage/newlist">文章列表</el-menu-item>
       </el-sub-menu>
       <!--      产品管理-->
       <el-sub-menu index="/product-manage">
@@ -53,8 +53,8 @@
           </el-icon>
           <span>产品管理</span>
         </template>
-        <el-menu-item index="/product-manafe/productadd">添加产品</el-menu-item>
-        <el-menu-item index="/product-manafe/productlist">产品列表</el-menu-item>
+        <el-menu-item index="/product-manage/productadd">添加产品</el-menu-item>
+        <el-menu-item index="/product-manage/productlist">产品列表</el-menu-item>
       </el-sub-menu>
     </el-menu>
   </el-aside>
@@ -75,7 +75,7 @@ const store = useStore()
 const route = useRoute()
 const vAdmin = {
   mounted(el) {
-    if (store.state.userInfo.role !== '管理员') {
+    if (store.state.userInfo.role === 1) {
       el.parentNode.removeChild(el)
     }
   }
@@ -87,7 +87,7 @@ const vAdmin = {
   background-color: #545c64;
 
   .el-menu {
-    border: solid 0px
+    border: solid 0
   }
 }
 

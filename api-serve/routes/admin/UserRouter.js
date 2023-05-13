@@ -2,14 +2,16 @@
  * @author: Natsume
  * @annotation: UserRouter
  */
-var express = require('express');
+const express = require('express');
 const UserController = require("../../controllers/admin/UserController")
-var UserRouter = express.Router();
+const UserRouter = express.Router();
 // 图片上传
 const multer = require('multer')
 const uploads = multer({dest: 'public/uploads/'})
 // 登录
 UserRouter.post("/adminapi/user/login", UserController.login)
+// 注册
+UserRouter.post("/adminapi/user/enroll", UserController.enroll)
 // 修改信息
 UserRouter.post("/adminapi/user/upload", uploads.single('file'), UserController.upload)
 // 添加用户

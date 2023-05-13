@@ -19,12 +19,13 @@ export default createStore({
             state.isCollapse = !state.isCollapse
         },
         changeUserInfo(state, value) {
+            // console.log(state,value)
             state.userInfo = {
                 ...state.userInfo,
                 ...value
             }
         },
-        clearUserInfo(state, value) {
+        clearUserInfo(state) {
             state.userInfo = {}
         },
     },

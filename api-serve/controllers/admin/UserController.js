@@ -39,19 +39,36 @@ const UserController = {
                     gender: result[0].gender ? result[0].gender : 0,
                     introduction: result[0].introduction ? result[0].introduction : '简介',   //简介
                     avatar: result[0].avatar,        //头像
-                    role: result[0].role ? '普通' : '管理员',           //身份，0，1，2表示(管理，普通。。。)
+                    role: result[0].role ,          //身份，0，1，2表示(管理，普通。。。)
                     date: result[0].date
                 }
             })
         }
-        return;
+
+    },
+    enroll: async (req,res) =>{
+        await UserService.enroll(req.body)
+            .then(data => {
+                if (data.lastErrorObject.updatedExisting) {
+                    //如果为true表示有这条数据
+                    res.send({
+                        ActionType: "fail",
+                    })
+                } else {
+                    res.send({
+                        ActionType: "OK",
+                    })
+                }
+            }
+        )
+
     },
     upload: async (req, res) => {
         // console.log("123", req.file)
         // 信息字段
         const {nickname, gender, introduction} = req.body
         // 头像字段
-        const avatar = req.file == undefined ? '' : `/uploads/${req.file.filename}`
+        const avatar = req.file === undefined ? '' : `/uploads/${req.file.filename}`
         // 通过token拿到_id字段
         const token = req.headers["authorization"].split(" ")[1]
         let payload = JWT.verify(token)
@@ -96,7 +113,7 @@ const UserController = {
             introduction
         } = req.body
         // 头像字段
-        const avatar = req.file == undefined ? '' : `/uploads/${req.file.filename}`
+        const avatar = req.file === undefined ? '' : `/uploads/${req.file.filename}`
         await UserService.useradd({
             nickname,
             username,
@@ -131,7 +148,7 @@ const UserController = {
     },
     delete: async (req, res) => {
         await UserService.delete({_id: req.params.id})
-            .then(data => {
+            .then(() => {
                 res.send({
                     ActionType: "OK",
                 })

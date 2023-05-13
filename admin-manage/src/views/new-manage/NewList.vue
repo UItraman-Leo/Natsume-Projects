@@ -24,32 +24,59 @@
                 :inactive-value="0"
                 :active-icon="Check"
                 :inactive-icon="Close"
+                @change="publishSwitch(scope.row)"
             />
           </template>
         </el-table-column>
         <el-table-column  label="操作" width="200">
           <template #default="scope">
-            <el-button :icon="Search" circle />
-            <el-button type="primary" :icon="Edit" circle />
-            <el-button type="danger" :icon="Delete" circle />
+            <el-button :icon="Search" circle @click="changePreview(scope.row)"/>
+            <el-button type="primary" :icon="Edit" circle @click="changeEdit(scope.row)"/>
+            <el-button type="danger" :icon="Delete" circle @click="changeDelete(scope.row._id)"/>
           </template>
         </el-table-column>
       </el-table>
     </el-card>
+<!--    预览框-->
+    <el-drawer
+        :data="Preview"
+        v-model="previewState"
+        title="预览"
+        :direction="direction"
+    >
+      <div>
+        <h2>{{ Preview.title }}</h2>
+        <span style="font-size: 10px;color:grey">{{formatTime.getTime(Preview.date)}}</span>
+        <el-divider>
+            <el-icon><Promotion /></el-icon>
+        </el-divider>
+        <div class="formatter" v-html="Preview.content"></div>
+      </div>
 
+    </el-drawer>
   </div>
 </template>
 
 <script setup>
 import {ref,onMounted} from "vue"
-import { Check, Close, Delete, Edit, Search} from '@element-plus/icons-vue'
+import { Check, Close, Delete, Edit, Search,Promotion} from '@element-plus/icons-vue'
 import axios from "axios"
 import formatTime from "@/util/formatTime"
+import {useRouter} from "vue-router"
+const router = useRouter()
+
 const tableData = ref([])
+// 存放预览信息
+const Preview = ref()
+// 弹出预览界面状态
+const previewState = ref(false)
+// 预览打开的方向
+const direction = ref('ltr')
 // 分类格式
 const classify = ref([
     "最新","典型","通知"
 ])
+// 初始获取列表信息
 onMounted(()=>{
   getTableData()
 })
@@ -57,12 +84,45 @@ const getTableData = async ()=>{
   const res = await axios.get("adminapi/new/list")
   if (res.data.ActionType === "OK"){
     tableData.value = res.data.data
-    console.log(tableData)
+    // console.log(tableData)
   }
 }
-
+// 切换发布开关，发送请求，修改状态
+const publishSwitch = async (item)=>{
+  // console.log(item)
+ await axios({
+    url: `/adminapi/new/switch`,
+    method: 'put',
+    data:{
+      id:item._id,
+      isPublish:item.isPublish
+    }
+  })
+}
+// 点击预览
+const changePreview = (item)=>{
+  Preview.value = item
+  previewState.value = true
+  // console.log(Preview)
+}
+// 点击修改
+const changeEdit = (item)=>{
+// 跳转到 users-manage/newedit
+  router.push(`/news-manage/newedit/${item._id}`)
+}
+//点击删除
+const changeDelete = async (_id)=>{
+ const res = await axios.delete(`/adminapi/new/setDel/${_id}`)
+  if (res.data.ActionType === 'OK'){
+    await getTableData()
+  }
+}
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+::v-deep(.formatter){
+  img{
+    max-width: 100%;
+  }
+}
 </style>

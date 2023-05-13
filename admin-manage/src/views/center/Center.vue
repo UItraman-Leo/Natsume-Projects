@@ -11,8 +11,8 @@
           <el-avatar
               :size="100" :src='avatarUrl'
           />
-          <h3>用户名:{{ store.state.userInfo.nickname }}</h3>
-          <h3>权限:{{ role }}</h3>
+          <h3>用户名:{{ nickname }}</h3>
+          <h3>权限:{{ role===0?"管理员":role===1?"用户":"游客" }}</h3>
         </el-card>
       </el-col>
       <el-col :span="16">
@@ -125,20 +125,20 @@ const options = [
 ]
 // 每次选完图片的回调
 const handleChange = (e) => {
-  console.log(e)
+  // console.log(e)
   // userForm.avatar = e.raw  //不能直接复制给头像的src，需要通过URL.createObjectURL
   userForm.avatar = URL.createObjectURL(e)
   // 给后端使用的头像信息
   userForm.file = e
 }
 //点击上传表单
-const clickUpload = (e) => {
+const clickUpload = () => {
   userFormRef.value.validate(async (valid) => {
     if (valid) {
       await upload(url, userForm)
           .then(res => {
             // console.log('上传发送', res.data)
-            if (res.data.ActionType == 'OK') {
+            if (res.data.ActionType === 'OK') {
               store.commit("changeUserInfo", res.data.data)
               ElMessage({
                 message: '修改成功',
@@ -146,7 +146,7 @@ const clickUpload = (e) => {
               })
             }
           })
-          .catch(err => {
+          .catch(() => {
             // console.log('上传失败', err)
             ElMessage({
               message: '修改失败',

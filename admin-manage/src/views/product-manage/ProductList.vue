@@ -1,11 +1,8 @@
 <template>
-  ProductList
+
 </template>
 
-<script>
-export default {
-  name: "ProductList"
-}
+<script setup>
 </script>
 
 <style scoped>

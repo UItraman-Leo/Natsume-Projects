@@ -6,6 +6,7 @@ import ProductAdd from "@/views/product-manage/ProductAdd.vue";
 import ProductList from "@/views/product-manage/ProductList.vue";
 import NewList from "@/views/new-manage/NewList.vue";
 import NewsAdd from "@/views/new-manage/NewsAdd.vue";
+import NewsEdit from "@/views/new-manage/NewsEdit.vue";
 import NotFound from "@/views/not-found/NotFound.vue";
 
 const routesConfig = [
@@ -18,30 +19,34 @@ const routesConfig = [
         component: Center
     },
     {
-        path: '/user-manafe/useradd',
+        path: '/user-manage/useradd',
         component: Useradd,
         requireAdmin: true
     },
     {
-        path: '/user-manafe/userlist',
+        path: '/user-manage/userlist',
         component: UserList,
         requireAdmin: true
     },
     {
-        path: '/product-manafe/productadd',
+        path: '/product-manage/productadd',
         component: ProductAdd
     },
     {
-        path: '/product-manafe/productlist',
+        path: '/product-manage/productlist',
         component: ProductList
     },
     {
-        path: '/news-manafe/newadd',
+        path: '/news-manage/newadd',
         component: NewsAdd
     },
     {
-        path: '/news-manafe/newlist',
+        path: '/news-manage/newlist',
         component: NewList
+    },
+    {
+        path: '/news-manage/newedit/:id',
+        component: NewsEdit
     },
     {
         path: '/',

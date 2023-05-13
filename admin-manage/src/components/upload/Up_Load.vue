@@ -1,3 +1,7 @@
+/**
+* @author: Natsume
+* @描述:上传组件
+*/
 <template>
   <el-upload
       :auto-upload="false"

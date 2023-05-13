@@ -12,7 +12,18 @@ const UserService = {
             password
         })
     },
-
+    enroll: async ({nickname,username,password}) =>{
+        console.log(nickname,username,password)
+        return UserModel.findOneAndUpdate({username}, {
+            $setOnInsert: {
+                nickname,
+                username,
+                password,
+                role:1
+            }
+            // rawResult: true  开启返回mongdb原生结果
+        }, {upsert: true, rawResult: true})
+    },
     upload: async ({
                        _id,
                        nickname,

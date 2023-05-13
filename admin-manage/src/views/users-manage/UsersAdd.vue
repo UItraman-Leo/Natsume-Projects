@@ -73,7 +73,7 @@
 <script setup>
 import {ref, reactive} from 'vue'
 import {Upload} from '@element-plus/icons-vue'
-import {ElMessage, FormInstan} from 'element-plus'
+import {ElMessage} from 'element-plus'
 import Up_Load from '@/components/upload/Up_Load.vue'
 import upload from "@/util/upload";
 
@@ -155,13 +155,13 @@ const handleChange = (e) => {
   userAddForm.file = e
 }
 // 添加
-const clickAdd = (e) => {
+const clickAdd = () => {
   userAddFormRef.value.validate(async (valid) => {
     if (valid) {
       await upload(url, userAddForm)
           .then((res) => {
             // console.log(res)
-            if (res.data.ActionType == "OK") {
+            if (res.data.ActionType === "OK") {
               ElMessage({
                 message: '添加成功',
                 type: 'success',
