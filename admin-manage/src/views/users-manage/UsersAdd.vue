@@ -1,12 +1,11 @@
 <template>
-  <div>
+  <div class="add">
     <el-card shadow="always">
       <el-form
           ref="userAddFormRef"
           :model="userAddForm"
           :rules="userAddFormRules"
           class="demo-ruleForm"
-          label-width="120px"
           status-icon
       >
         <el-form-item label="昵称" prop="nickname">
@@ -189,9 +188,18 @@ const clickAdd = () => {
 </script>
 
 <style lang="scss" scoped>
-.box-card {
-  text-align: center;
+.add{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  .el-card {
+  width: 900px;
+    border-radius: 40px;
+  }
 }
+
 
 
 </style>
