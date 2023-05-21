@@ -2,6 +2,9 @@
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
+			// #ifdef H5
+			uni.hideTabBar()
+			// #endif
 		},
 		onShow: function() {
 			console.log('App Show')
@@ -13,5 +16,4 @@
 </script>
 
 <style>
-	/*每个页面公共css */
 </style>

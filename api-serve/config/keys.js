@@ -1,5 +1,5 @@
 module.exports = {
-    DBHOST: '127.0.0.1',
+    DBHOST: '43.136.115.67',
     DBPORT: 27017,
-    DBNAME: 'project'
+    DBNAME: 'backstage'
 }

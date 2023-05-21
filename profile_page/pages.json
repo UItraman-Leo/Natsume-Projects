@@ -1,17 +1,62 @@
 {
+	"topWindow": {
+		"path": "/windown/tar-bar.vue",
+		"style": {
+			"backgroundColor": "#329898",
+			"height": "50px"
+		},
+		"matchMedia": {
+			"minWidth": 100 //生效条件，当窗口宽度大于768px时显示
+		}
+	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
 			"path": "pages/index/index",
 			"style": {
-				// "navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "uni-app"
+			}
+		},
+		{
+			"path": "pages/content/content",
+			"style": {
+				"navigationBarTitleText": "uni-app"
+			}
+		},
+		{
+			"path": "pages/news/news",
+			"style": {
+				"navigationBarTitleText": "uni-app"
+			}
+		},
+		{
+			"path": "pages/music/music",
+			"style": {
+				"navigationBarTitleText": "uni-app"
 			}
 		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "夏目",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"backgroundColor": "#F8F8F8",
+		"h5": {
+			"titleNView": false
+		}
 	},
-	"uniIdRouter": {}
+	"tabBar": {
+		"backgroundColor": "#9ebfbf",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"text": "音乐"
+		}, {
+			"pagePath": "pages/content/content",
+			"text": "接口"
+		}, {
+			"pagePath": "pages/news/news",
+			"text": "公告"
+		}, {
+			"pagePath": "pages/music/music",
+			"text": "音乐"
+		}]
+	}
 }
