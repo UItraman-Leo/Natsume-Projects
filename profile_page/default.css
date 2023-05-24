@@ -1,3 +1,11 @@
+@font-face {
+	font-family: "得意黑 斜体";
+	font-weight: 400;
+	src: url("//at.alicdn.com/wf/webfont/ZVoAyfffxIjh/iRPhDvUN7wfA.woff2") format("woff2"),
+		url("//at.alicdn.com/wf/webfont/ZVoAyfffxIjh/VOsfI8rjezCH.woff") format("woff");
+	font-display: swap;
+}
+
 body,
 ol,
 ul,

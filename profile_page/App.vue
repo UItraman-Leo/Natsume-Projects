@@ -16,4 +16,5 @@
 </script>
 
 <style>
+	@import "/default.css"
 </style>

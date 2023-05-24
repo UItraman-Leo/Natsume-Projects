@@ -8,7 +8,16 @@
 				<view>
 					<!-- 列表项 -->
 					<view class="song" v-for="(item,index) in list" :key="index" @click="clickCut({item,index})">
-						{{index}}
+
+						<view class="song_title">
+							{{item.name}}
+						</view>
+						<view class="singer_name">
+							{{item.singer}}
+						</view>
+						<view class="profile_photo">
+							时间
+						</view>
 					</view>
 					<!-- 列表项 -->
 				</view>
@@ -53,9 +62,9 @@
 
 
 				<!--音频api处[视频代替音频-实现倍数功能]-->
-				<video id="myVideo" ref="myVideo" :src="recorPath" class="hidden" @timeupdate="timeupdate"
-					:autoplay="autoplays" @loadedmetadata="loadedmetadata" @ended="next" controls
-					style="width: 10rpx;height:10rpx;">
+				<video id="myVideo" ref="myVideo" :src="recorPath" class="hidden" :autoplay="autoplays"
+					@timeupdate="timeupdate" @loadedmetadata="loadedmetadata" @ended="next" controls
+					auto-pause-if-navigate="false" auto-pause-if-open-native="false">
 				</video>
 				<!--音频api处[视频代替音频-实现倍数功能]-->
 
@@ -105,11 +114,8 @@
 	 slideYes  --   滑动进度条时是否开启播放 - 默认false
 	 switAud   --   切换上下音频是否开启播放 - 默认false
 	 BsNav     --   倍数数据传入/数组形式
-	 
-	 按钮图片未自定义，如想改动请在组件内部修改，页面头部已注释 -- 逻辑根据自己需求改
-	 目前只测试 微信小程序和H5和APP -- 其他平台未知
-	  Author:chenxin  交流vx:cxalq8-24  
 	*/
+	import calcTimer from '../../../../util/calcTimer'
 	export default {
 		name: "xm-music-player",
 		props: {
@@ -239,6 +245,7 @@
 
 		},
 		methods: {
+
 			clickCut(e) { //选择列表歌曲
 				console.log("eee", e);
 				this.recorPath = e.item.recorPath
@@ -464,6 +471,10 @@
 				if (this.num + 1 < this.list.length) {
 					this.succes = true
 					this.num += 1
+					// 获取需要发送的url
+
+					// 发送请求获取歌曲资源
+
 					this.recorPath = this.list[this.num].recorPath
 					setTimeout(() => {
 						//#ifdef H5
@@ -493,21 +504,6 @@
 		},
 		watch: {}
 	}
-	//时间换算
-	function calcTimer(timer) {
-		if (timer === 0 || typeof timer !== 'number') {
-			return '00:00'
-		}
-		let mm = Math.floor(timer / 60)
-		let ss = Math.floor(timer % 60)
-		if (mm < 10) {
-			mm = '0' + mm
-		}
-		if (ss < 10) {
-			ss = '0' + ss
-		}
-		return mm + ':' + ss
-	}
 </script>
 <style lang="scss" scoped>
 	// 主区
@@ -531,7 +527,29 @@
 			.song {
 				border-bottom: 1px solid #000;
 				height: 120rpx;
-				background-color: hotpink
+				display: grid;
+				grid-template-columns: 33.33% 33.33% 33.33%;
+
+				// 头像
+				.profile_photo {
+					margin: auto;
+					font-size: 26rpx;
+					color: #546e7a;
+				}
+
+				// 歌名
+				.song_title {
+					margin: auto;
+					font-size: 26rpx;
+					color: #546e7a;
+				}
+
+				// 歌手名
+				.singer_name {
+					margin: auto;
+					font-size: 26rpx;
+					color: #546e7a;
+				}
 			}
 		}
 

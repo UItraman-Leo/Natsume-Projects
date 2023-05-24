@@ -4,7 +4,7 @@
 			qqqq
 		</view>
 		<view class="tar-bar-conter">
-			<web-navbar-conter :tarbar_data=tarbar_data></web-navbar-conter>
+			<web_navbar_conter :tarbar_data=tarbar_data></web_navbar_conter>
 		</view>
 		<view class="tar-bar-right">
 			eeee
@@ -13,7 +13,11 @@
 </template>
 
 <script>
+	import web_navbar_conter from "@/platforms/web/web-navbar-conter/web-navbar-conter.vue"
 	export default {
+		components: {
+			web_navbar_conter
+		},
 		data() {
 			return {
 				tarbar_data: {

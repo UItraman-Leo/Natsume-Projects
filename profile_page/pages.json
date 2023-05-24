@@ -47,10 +47,10 @@
 		"backgroundColor": "#9ebfbf",
 		"list": [{
 			"pagePath": "pages/index/index",
-			"text": "音乐"
+			"text": "首页"
 		}, {
 			"pagePath": "pages/content/content",
-			"text": "接口"
+			"text": "导航"
 		}, {
 			"pagePath": "pages/news/news",
 			"text": "公告"
