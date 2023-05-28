@@ -4,7 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const UserRouter = require("./routes/admin/UserRouter");
-const NewRouter = require("./routes/admin/NewRouter")
+const NewRouter = require("./routes/admin/NewRouter");
+const ProductRouter = require("./routes/admin/ProductRouter");
 const JWT = require("./util/JWT");
 const app = express();
 // view engine setup
@@ -51,6 +52,7 @@ app.use((req, res, next) => {
 })
 app.use(UserRouter)
 app.use(NewRouter)
+app.use(ProductRouter)
 // 后台系统用
 
 //前台用的

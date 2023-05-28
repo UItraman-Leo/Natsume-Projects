@@ -13,7 +13,7 @@ const UserService = {
         })
     },
     enroll: async ({nickname,username,password}) =>{
-        console.log(nickname,username,password)
+        // console.log(nickname,username,password)
         return UserModel.findOneAndUpdate({username}, {
             $setOnInsert: {
                 nickname,
