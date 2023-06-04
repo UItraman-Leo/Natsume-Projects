@@ -71,11 +71,11 @@ const newForm = reactive({
 const newFormRules = reactive({
   title: [
     {required: true, message: '标题', trigger: 'blur'},
-    {min: 1, max: 20, message: 'Length should be 1 to 20', trigger: 'blur'},
+    {min: 1, max: 50, message: 'Length should be 1 to 50', trigger: 'blur'},
   ],
   content: [
     {required: true, message: '内容', trigger: 'blur'},
-    {min: 1, max: 99999, message: 'Length should be 1 to 20', trigger: 'blur'},
+    {min: 1, max: 99999, message: 'Length should be 1 to 99999', trigger: 'blur'},
   ],
   category: [
     {required: true, message: '性别', trigger: 'blur'},
@@ -86,15 +86,15 @@ const newFormRules = reactive({
 })
 const options = [
   {
-    label: '最新',
+    label: '游戏热点',
     value: 1
   },
   {
-    label: '典型',
+    label: '体育娱乐',
     value: 2
   },
   {
-    label: '通知',
+    label: '文章',
     value: 3
   },
 ]

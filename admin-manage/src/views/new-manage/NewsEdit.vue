@@ -94,15 +94,15 @@ const newFormRules = reactive({
 })
 const options = [
   {
-    label: '最新',
+    label: '游戏热点',
     value: 1
   },
   {
-    label: '典型',
+    label: '体育娱乐',
     value: 2
   },
   {
-    label: '通知',
+    label: '文章',
     value: 3
   },
 ]

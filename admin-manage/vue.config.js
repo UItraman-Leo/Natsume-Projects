@@ -7,8 +7,13 @@ module.exports = defineConfig({
             "/adminapi": {
                 target: "http://127.0.0.1:3000",
                 changeOrigin: true
+            },
+            "/web": {
+                target: "http://127.0.0.1:3000",
+                changeOrigin: true
             }
         }
+
     }
 
 })

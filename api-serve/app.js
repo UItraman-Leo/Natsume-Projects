@@ -6,6 +6,7 @@ const logger = require('morgan');
 const UserRouter = require("./routes/admin/UserRouter");
 const NewRouter = require("./routes/admin/NewRouter");
 const ProductRouter = require("./routes/admin/ProductRouter");
+const FrontDeskNewsRouter = require("./routes/web/FrontDeskNewsRouter");
 const JWT = require("./util/JWT");
 const app = express();
 // view engine setup
@@ -17,6 +18,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+//前台用的
+app.use(FrontDeskNewsRouter)
 
 // 后台系统用
 app.use((req, res, next) => {
@@ -54,9 +59,6 @@ app.use(UserRouter)
 app.use(NewRouter)
 app.use(ProductRouter)
 // 后台系统用
-
-//前台用的
-
 
 
 // catch 404 and forward to error handler

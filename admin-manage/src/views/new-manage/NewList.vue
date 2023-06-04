@@ -74,7 +74,7 @@ const previewState = ref(false)
 const direction = ref('ltr')
 // 分类格式
 const classify = ref([
-    "最新","典型","通知"
+    "游戏热点","体育娱乐","文章"
 ])
 // 初始获取列表信息
 onMounted(()=>{
