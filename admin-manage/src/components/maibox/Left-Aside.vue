@@ -4,10 +4,10 @@
         :collapse="$store.state.isCollapse"
         :default-active="route.fullPath"
         :router="true"
-        active-text-color="#ffd04b"
-        background-color="#545c64"
+        active-text-color="#f48fb1"
+        background-color="#94efd8"
         class="el-menu"
-        text-color="#fff"
+        text-color="#111"
     >
       <!--      主页-->
       <el-menu-item index="/home">
@@ -45,16 +45,16 @@
         <el-menu-item index="/news-manage/newadd">创建文章</el-menu-item>
         <el-menu-item index="/news-manage/newlist">文章列表</el-menu-item>
       </el-sub-menu>
-      <!--      产品管理-->
+      <!--      导航管理-->
       <el-sub-menu index="/product-manage">
         <template #title>
           <el-icon>
             <icon-menu/>
           </el-icon>
-          <span>产品管理</span>
+          <span>导航管理</span>
         </template>
-        <el-menu-item index="/product-manage/productadd">添加产品</el-menu-item>
-        <el-menu-item index="/product-manage/productlist">产品列表</el-menu-item>
+        <el-menu-item index="/product-manage/productadd">添加导航</el-menu-item>
+        <el-menu-item index="/product-manage/productlist">导航列表</el-menu-item>
       </el-sub-menu>
     </el-menu>
   </el-aside>
@@ -84,9 +84,8 @@ const vAdmin = {
 
 <style lang="scss" scoped>
 .el-aside {
-  background-color: #545c64;
-
-  .el-menu {
+  background-color: #94efd8;
+  .el-menu{
     border: solid 0
   }
 }

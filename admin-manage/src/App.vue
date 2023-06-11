@@ -6,6 +6,7 @@
 * {
   margin: 0;
   padding: 0;
+  cursor: url("../public/lulu.ico"), default;
 }
 
 ::-webkit-scrollbar {

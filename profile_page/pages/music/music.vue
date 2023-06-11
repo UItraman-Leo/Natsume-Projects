@@ -1,13 +1,13 @@
 <template>
-	<view>
+	<view class="music">
 		<view class="seek">
-			<uni-search-bar class="example-body" bgColor="red" radius="100" v-model="searchValue" placeholder='搜索'
-				:focus="true" cancelButton='none' clearButton="none" @confirm="search(searchValue)"></uni-search-bar>
+			<uni-search-bar class="example-body" radius="100" v-model="searchValue" placeholder='搜索' :focus="true"
+				cancelButton='none' clearButton="none" @confirm="search(searchValue)"></uni-search-bar>
 
 			<uni-data-select v-model="sourceValue" :localdata="range" clear="false"></uni-data-select>
 		</view>
 		<view style="width:100%;;position:absolute;bottom: 0px;">
-			<xm-music-player :list="list" :BsNav="BsNav"></xm-music-player>
+			<xm-music-player :list="list"></xm-music-player>
 		</view>
 	</view>
 </template>
@@ -39,19 +39,7 @@
 					// 	img1v1Url: "https://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
 					// 	recorPath: "http://m701.music.126.net/20230523215313/324c827864453333bbfe0dedfde3f662/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/14080948558/766a/a28b/ff92/6558894fc94f8f7b641d774149a088db.mp3"
 					//}
-				], //音频文件	
-				BsNav: [ //倍数-自定义
-					{
-						id: 1.0,
-						bs: '1.0'
-					}, {
-						id: 1.5,
-						bs: '1.5'
-					}, {
-						id: 2.0,
-						bs: '2.0'
-					}
-				],
+				] //音频文件
 			}
 		},
 		methods: {
@@ -70,9 +58,7 @@
 									id  id
 									歌名  name
 									歌手  artists[0].name
-									图片  artists[0].img1v1Url
 									*/
-									// console.log(res);
 									const a = await Promise.all(
 										res.data.result.songs.map(async (item) => {
 											const {
@@ -81,21 +67,41 @@
 												artists,
 												duration
 											} = item;
-											const singer = artists[0].name
-											// 通过 id 调用获取 mp3 的接口
-											const recorPath = await Resource1.getMP3(id).then((
-												data) => {
-												// console.log("@@", data);
-												return data.data.data[0].url
-											})
+											// console.log(id,
+											// 	name,
+											// 	artists[0].name,
+											// 	duration);
 											return {
+												id,
 												name,
-												singer,
-												recorPath,
+												artists: artists[0].name,
 												duration
 											}
-										})
-									)
+										}))
+									// console.log(res);
+									// const a = await Promise.all(
+									// 	res.data.result.songs.map(async (item) => {
+									// 		const {
+									// 			id,
+									// 			name,
+									// 			artists,
+									// 			duration
+									// 		} = item;
+									// 		const singer = artists[0].name
+									// 		// 通过 id 调用获取 mp3 的接口
+									// 		const recorPath = await Resource1.getMP3(id).then((
+									// 			data) => {
+									// 			// console.log("@@", data);
+									// 			return data.data.data[0].url
+									// 		})
+									// 		return {
+									// 			name,
+									// 			singer,
+									// 			recorPath,
+									// 			duration
+									// 		}
+									// 	})
+									// )
 									// console.log(a);
 									this.list = a
 								}

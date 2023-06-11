@@ -70,17 +70,17 @@
           :model="userAddForm"
           :rules="userFormRules">
         <el-form-item label="名字" prop="nickname">
-          <el-input v-model="userAddForm.nickname"/>
+          <el-input v-model.trim="userAddForm.nickname"/>
         </el-form-item>
         <el-form-item label="用户名" prop="username">
-          <el-input v-model="userAddForm.username"/>
+          <el-input v-model.trim="userAddForm.username"/>
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input v-model="userAddForm.password"/>
+          <el-input v-model.trim="userAddForm.password"/>
         </el-form-item>
         <el-form-item label="权限" prop="role">
           <el-select
-              v-model="userAddForm.role"
+              v-model.trim="userAddForm.role"
               class="m-2"
               placeholder="Select"
           >
@@ -126,14 +126,16 @@ const userFormRules = reactive({
     {required: true, message: '用户名', trigger: 'blur'},
     {min: 1, max: 10, message: 'Length should be 1 to 10', trigger: 'blur'},
   ],
-  gender: [
-    {required: true, message: '性别', trigger: 'blur'},
+  username: [
+    {required: true, message: '用户名', trigger: 'blur'},
+    {min: 1, max: 10, message: 'Length should be 1 to 10', trigger: 'blur'},
   ],
-  introduction: [
-    {required: false, message: '说明', trigger: 'blur'},
+  password: [
+    {required: true, message: '密码', trigger: 'blur'},
+    {min: 1, max: 15, message: 'Length should be 1 to 15', trigger: 'blur'},
   ],
-  avatar: [
-    {required: false, message: '头像', trigger: 'blur'},
+  role: [
+    {required: true, message: '权限', trigger: 'blur'},
   ],
 })
 // 权限

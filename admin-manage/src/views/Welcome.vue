@@ -12,7 +12,6 @@
       </el-col>
       <el-col :span="7">
         <div class="loginRegister">
-
           <el-collapse v-model="activeName" accordion>
             <el-collapse-item  name="1">
               <template #title>

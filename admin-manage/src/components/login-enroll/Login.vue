@@ -14,7 +14,7 @@
       <el-form-item prop="username">
         <el-input
             placeholder="账号"
-            v-model="LoginForm.username"
+            v-model.trim="LoginForm.username"
             autocomplete="off"
             type="text"
         />
@@ -23,7 +23,7 @@
       <el-form-item prop="password">
         <el-input
             placeholder="密码"
-            v-model="LoginForm.password"
+            v-model.trim="LoginForm.password"
             autocomplete="off"
             type="password"
         />
@@ -55,10 +55,11 @@ const LoginForm = reactive({//表单绑定的响应式对象
 const LoginFormRules = reactive({
   username: [
     {required: true, message: '请输入用户名'},
-    {min: 1, max: 10, message: 'Length should be 1 to 10'},
+    {min: 5, max: 15, message: 'Length should be 5 to 15'},
   ],
   password: [
     {required: true, message: '请输入密码'},
+    {min: 5, max: 15, message: 'Length should be 5 to 15'},
   ]
 })
 const disabled = ref(false)

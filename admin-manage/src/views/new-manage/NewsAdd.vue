@@ -10,7 +10,7 @@
           status-icon
       >
         <el-form-item label="标题" prop="title">
-          <el-input v-model="newForm.title"/>
+          <el-input v-model.trim="newForm.title"/>
         </el-form-item>
         <el-form-item label="内容" prop="content">
           <Editor @content="contentChange"></Editor>

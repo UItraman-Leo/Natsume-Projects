@@ -5,7 +5,12 @@
         <el-table-column label="名字" prop="name" width="200"/>
         <el-table-column label="图标" width="200">
           <template #default="scope">
-          {{scope.row.img}}
+            <el-avatar shape='square'
+                        :size="50"
+                       :src="scope.row.img
+"
+            />
+
           </template>
         </el-table-column>
         <el-table-column  label="操作" width="200">
@@ -17,15 +22,15 @@
       </el-table>
       <!--        修改-->
       <el-dialog v-model="dialogFormVisible" width="700" title="修改" center="true" align-center="true" :before-close="clickCancelTrevise">
-        <el-form :model="fromData" :rules="reviseFormRules">
+        <el-form :model="fromData" :rules="reviseFormRules" ref="ProductListFormRef">
           <el-form-item label="名字" prop="name" :label-width="formLabelWidth">
-            <el-input v-model="fromData.name" autocomplete="off" />
+            <el-input v-model.trim="fromData.name" autocomplete="off" />
           </el-form-item>
           <el-form-item label="图标链接" prop="img" :label-width="formLabelWidth">
-            <el-input v-model="fromData.img" autocomplete="off" />
+            <el-input v-model.trim="fromData.img" autocomplete="off" />
           </el-form-item>
           <el-form-item label="跳转链接" prop="Link" :label-width="formLabelWidth">
-            <el-input v-model="fromData.Link" autocomplete="off" />
+            <el-input v-model.trim="fromData.Link" autocomplete="off" />
           </el-form-item>
           <el-form-item label="分组" prop="grouping" :label-width="formLabelWidth">
             <el-select
@@ -65,6 +70,7 @@ const tableData = ref([])
 const dialogFormVisible = ref(false)
 const formLabelWidth = '140px'
 const fromData = ref([])
+const ProductListFormRef = ref()
 const options = [
   {
     label: '开发',
@@ -82,17 +88,17 @@ const options = [
 // 表单规则
 const reviseFormRules = reactive({
   name: [
-    {required: true, message: '昵称', trigger: 'blur'},
+    {required: true, message: '名字', trigger: 'blur'},
     {min: 1, max: 30, message: 'Length should be 1 to 30', trigger: 'blur'},
   ],
   grouping: [
-    {required: true, message: '用户名', trigger: 'blur'},
+    {required: true, message: '分组', trigger: 'blur'},
   ],
   img: [
-    {required: true, message: '权限', trigger: 'blur'},
+    {required: true, message: '图标链接', trigger: 'blur'},
   ],
   Link: [
-    {required: true, message: '密码', trigger: 'blur'},
+    {required: true, message: '跳转链接', trigger: 'blur'},
   ]
 })
 
@@ -118,18 +124,27 @@ const clickCancelTrevise = async ()=>{
 }
 // 提交修改
 const clickCommiTrevise = async (item)=>{
-  await axios.put(`/adminapi/product/put/`, item)
-      .then(async data=>{
-        if (data.data.ActionType==="OK"){
-          await getTableData()
-          dialogFormVisible.value = false
-          ElMessage({
-            message: '提交成功',
-            type: 'success',
+  ProductListFormRef.value.validate(async (valid) => {
+    if (valid) {
+      await axios.put(`/adminapi/product/put/`, item)
+          .then(async data=>{
+            if (data.data.ActionType==="OK"){
+              await getTableData()
+              dialogFormVisible.value = false
+              ElMessage({
+                message: '提交成功',
+                type: 'success',
+              })
+            }
           })
-        }
+    }else {
+      //   2.2返回数据不通过，则提示重复
+      ElMessage({
+        message: '错误',
+        type: 'warning',
       })
-
+    }
+  })
 }
 
 //点击删除

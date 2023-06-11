@@ -15,7 +15,7 @@
         <el-input
 
             placeholder="用户名"
-            v-model="EnrollForm.nickname"
+            v-model.trim="EnrollForm.nickname"
             autocomplete="off"
             type="text"
         />
@@ -24,7 +24,7 @@
       <el-form-item prop="username">
         <el-input
             placeholder="账号"
-            v-model="EnrollForm.username"
+            v-model.trim="EnrollForm.username"
             autocomplete="off"
             type="text"
         />
@@ -33,7 +33,7 @@
       <el-form-item prop="password">
         <el-input
             placeholder="密码"
-            v-model="EnrollForm.password"
+            v-model.trim="EnrollForm.password"
             autocomplete="off"
             type="password"
         />
@@ -69,11 +69,11 @@ const EnrollFormRules = reactive({
   ],
   username: [
     {required: true, message: '请输入账号'},
-    {min: 3, max: 10, message: 'Length should be 3 to 10'},
+    {min: 5, max: 15, message: 'Length should be 5 to 15'},
   ],
   password: [
     {required: true, message: '请输入密码'},
-    {min: 3, max: 10, message: 'Length should be 3 to 10'},
+    {min: 5, max: 15, message: 'Length should be 5 to 15'},
   ]
 })
 // 按钮点击状态

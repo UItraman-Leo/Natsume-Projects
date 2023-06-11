@@ -9,13 +9,13 @@
           status-icon
       >
         <el-form-item label="名字" prop="name">
-          <el-input v-model="ProductAddForm.name"/>
+          <el-input v-model.trim="ProductAddForm.name"/>
         </el-form-item>
         <el-form-item label="图标链接" prop="img">
-          <el-input v-model="ProductAddForm.img"/>
+          <el-input v-model.trim="ProductAddForm.img"/>
         </el-form-item>
         <el-form-item label="跳转链接" prop="Link">
-          <el-input v-model="ProductAddForm.Link"/>
+          <el-input v-model.trim="ProductAddForm.Link"/>
         </el-form-item>
         <el-form-item label="分组" prop="grouping">
           <el-select
@@ -106,7 +106,7 @@ const clickAdd = () => {
               // 3.清除输入框内容
               ProductAddFormRef.value.resetFields()
             }else{
-              //   2.2返回数据不通过，则提示账号重复
+              //   2.2返回数据不通过，则提示重复
               ElMessage({
                 message: '已存在',
                 type: 'warning',

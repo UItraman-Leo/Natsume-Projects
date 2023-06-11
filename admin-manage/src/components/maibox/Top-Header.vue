@@ -4,7 +4,7 @@
       <el-icon class="is-Grid" @click="clickCollapse">
         <Grid/>
       </el-icon>
-      <span>????后台管理系统</span>
+<!--      <span>????后台管理</span>-->
     </div>
     <div class="right">
       <span>{{ store.state.userInfo.nickname }}</span>
@@ -18,13 +18,13 @@
               个人中心
             </el-dropdown-item>
             <el-dropdown-item :icon="CirclePlusFilled">
-              ????
+              啥也没有
             </el-dropdown-item>
             <el-dropdown-item :icon="CirclePlus">
-              ????
+              啥也没有
             </el-dropdown-item>
             <el-dropdown-item :icon="Check">
-              ????
+              啥也没有
             </el-dropdown-item>
             <el-dropdown-item :icon="CircleCheck" @click="clickQuit">
               退出登录

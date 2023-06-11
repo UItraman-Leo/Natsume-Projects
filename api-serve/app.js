@@ -7,6 +7,7 @@ const UserRouter = require("./routes/admin/UserRouter");
 const NewRouter = require("./routes/admin/NewRouter");
 const ProductRouter = require("./routes/admin/ProductRouter");
 const FrontDeskNewsRouter = require("./routes/web/FrontDeskNewsRouter");
+const FrontDeskProductRouter = require("./routes/web/FrontDeskProductRouter");
 const JWT = require("./util/JWT");
 const app = express();
 // view engine setup
@@ -22,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //前台用的
 app.use(FrontDeskNewsRouter)
-
+app.use(FrontDeskProductRouter)
 // 后台系统用
 app.use((req, res, next) => {
     // console.log(req.headers["authorization"].split(" ")[1])

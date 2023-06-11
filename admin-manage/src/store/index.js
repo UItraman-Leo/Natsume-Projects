@@ -6,7 +6,7 @@ export default createStore({
         // 用来记录第一次进入路由的状态
         isGetterRouter: false,
         // 用来记录侧边栏是否水平折叠收起菜单
-        isCollapse: true,
+        isCollapse: false,
         // 用来存储用户信息
         userInfo: {},
     },

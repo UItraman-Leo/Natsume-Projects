@@ -9,13 +9,13 @@
           status-icon
       >
         <el-form-item label="昵称" prop="nickname">
-          <el-input v-model="userAddForm.nickname"/>
+          <el-input v-model.trim="userAddForm.nickname"/>
         </el-form-item>
         <el-form-item label="用户名" prop="username">
-          <el-input v-model="userAddForm.username"/>
+          <el-input v-model.trim="userAddForm.username"/>
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input v-model="userAddForm.password"/>
+          <el-input v-model.trim="userAddForm.password"/>
         </el-form-item>
         <el-form-item label="权限" prop="role">
           <el-select
@@ -46,7 +46,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="说明" prop="introduction">
-          <el-input v-model="userAddForm.introduction"
+          <el-input v-model.trim="userAddForm.introduction"
                     :autosize="{ minRows: 2, maxRows: 4 }"
                     type="textarea"
           />

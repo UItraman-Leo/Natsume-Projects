@@ -2,30 +2,23 @@
 	<view class="content">
 		<view class="swiper_title">
 			<text style="margin: 0 auto;">
-				{{nav_Data[swiperDotIndex].title}}
+				{{Object.keys(nav_Data)[swiperDotIndex]}}
 			</text>
 		</view>
 		<uni-swiper-dot :info="nav_Data" :current="swiperDotIndex" :mode="mode" :dots-styles="dotsStyles">
 			<swiper class="swiper-box" :current="swiperDotIndex" circular="true" display-multiple-items="1"
 				@change=chanCurrent>
-				<swiper-item class="swiper_item" v-for="(item, index) in nav_Data" :key="index">
-					<view :style="{height: '100%', width:'100%', overflowY: 'auto',backgroundColor:item.bgColor}">
-						<view class="wrapper">
-							<view class="item" v-for="(navItem, navIndex) in item.nav">
-								<uni-card padding="0" spacing="0" margin="0" is-full="true" is-shadow="true"
-									style="border: 0px;width: 100%;height: 100%; box-shadow:rgb(39 2 2 / 99%) 0px 0px 3px 1px;border-radius: 10rpx;">
-									<template v-slot:cover>
-										<view class="custom-cover">
-											<image class="cover-image" mode="aspectFill" :src="navItem.img">
-											</image>
-											<view class="cover-content">
-												<text class="uni-subtitle uni-white">
-													{{navItem.text}}
-												</text>
-											</view>
-										</view>
-									</template>
-								</uni-card>
+				<swiper-item class="swiper_item" v-for="(val, _, index) in nav_Data" :key="index">
+					<view class="grid-container">
+						<view class="item" v-for="(navItem, navIndex) in val">
+							<view class="item_img" @click="toLink({navItem,navIndex})">
+								<image style="width: 100%;height: 100%;" mode="aspectFill" :src="navItem.img">
+								</image>
+							</view>
+							<view class="item_text">
+								<text>
+									{{navItem.name}}
+								</text>
 							</view>
 						</view>
 					</view>
@@ -36,6 +29,8 @@
 </template>
 
 <script>
+	import $axios from '../../util/axios.js'
+	import groupBy from '../../util/groupBy.js'
 	export default {
 		data() {
 			return {
@@ -48,37 +43,9 @@
 					selectedBackgroundColor: 'rgba(0, 0, 0, 0.9)',
 					selectedBorder: '1px rgba(0, 0, 0, 0.9) solid'
 				},
-				nav_Data: [{ //导航数据
-						title: "常用导航",
-						bgColor: "#00ff7f",
-						nav: [{ //内容区数据
-							img: "https://web-assets.dcloud.net.cn/unidoc/zh/unicloudlogo.png",
-							text: "vue"
-						}, { //内容区数据
-							img: "https://web-assets.dcloud.net.cn/unidoc/zh/unicloudlogo.png",
-							text: "vue"
-						}, { //内容区数据
-							img: "https://web-assets.dcloud.net.cn/unidoc/zh/unicloudlogo.png",
-							text: "vue"
-						}]
-					},
-					{
-						title: "作图",
-						bgColor: "#55aaff",
-						nav: [{
-							img: "https://web-assets.dcloud.net.cn/unidoc/zh/unicloudlogo.png",
-							text: "vue"
-						}]
-					},
-					{
-						title: "娱乐",
-						bgColor: "#ffff00",
-						nav: [{
-							img: "https://web-assets.dcloud.net.cn/unidoc/zh/unicloudlogo.png",
-							text: "vue"
-						}]
-					}
-				]
+				nav_Data: {
+					// "XXX": [{}]
+				}
 			}
 		},
 		methods: {
@@ -86,9 +53,37 @@
 			chanCurrent(event) {
 				// console.log(event.detail.current);
 				this.swiperDotIndex = event.detail.current
+			},
+			// 提示无法跳转，确认后复制地址
+			toLink(e) {
+				// console.log(e.navItem.Link);
+				uni.showModal({
+					title: '提示',
+					content: '小程序权限限制无法打开链接，点击确定复制链接到剪切板',
+					success: function(res) {
+						if (res.confirm) {
+							console.log('用户点击确定');
+							uni.setClipboardData({
+								data: e.navItem.Link,
+								showToast: true,
+								success() {},
+								fail() {}
+							})
+						} else if (res.cancel) {
+							console.log('用户点击取消');
+						}
+					}
+				});
 			}
 
 		},
+		onLoad() {
+			$axios.getNew('http://127.0.0.1:3000/web/content/list').then((res) => {
+				let arry = res.data.data
+				this.nav_Data = groupBy(arry)
+				// console.log(">>>", groupBy(arry));
+			})
+		}
 	}
 </script>
 
@@ -96,52 +91,63 @@
 	.content {
 		height: 100vh;
 		border: 0px;
+		background-color: #000000;
+
+		// 头部标题
+		.swiper_title {
+			margin: auto;
+			width: 300rpx;
+			border-radius: 100vw;
+			background-color: #14d8b9f5;
+			height: 100rpx;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+
+		$Colors: #000000 #14d8b9f5 #dfff33;
 
 		.swiper-box {
 			height: calc(100vh - 100rpx);
 
 			.swiper_item {
-				.wrapper {
-					margin: auto;
-					height: 100%;
+				overflow-y: scroll;
+
+				.grid-container {
 					display: grid;
-					grid-auto-flow: row dense;
-					grid-template-columns: repeat(auto-fit, minmax(140rpx, 140rpx));
-					/*  声明行的高度  */
-					grid-template-rows: 140rpx;
-					grid-gap: 20px;
+					grid-template-columns: 6% auto auto 6%;
+					padding: 20rpx;
+					grid-row-gap: 40rpx;
 
 					.item {
-						width: 140rpx;
+						border: 1px solid rgba(0, 255, 255, 0.8);
+						border-radius: 30rpx;
+						box-shadow: 10px 12px 5px rgba(0, 255, 255, 0.8);
+						grid-column: 2 / 4;
 						height: 140rpx;
-						position: relative;
+						overflow: hidden;
+						display: flex;
 
-						.custom-cover {
-							border: 0px;
+						.item_img {
 							width: 140rpx;
 							height: 140rpx;
-							display: flex;
-							flex-direction: column;
-							align-items: center;
+						}
 
-							.cover-image {
-								width: 100%;
-								height: 100%;
-							}
+						.item_text {
+							color: #ffffff;
+							width: 80%;
+							height: 140rpx;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							flex-wrap: nowrap;
+
 						}
 					}
 				}
-			}
-		}
 
-		.swiper_title {
-			margin: auto;
-			width: 300rpx;
-			background-color: coral;
-			height: 100rpx;
-			display: flex;
-			flex-direction: row;
-			align-items: center;
+			}
+
 		}
 	}
 </style>

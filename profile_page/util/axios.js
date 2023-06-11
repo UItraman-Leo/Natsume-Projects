@@ -5,7 +5,7 @@
 	3、参数
 */
 const $axios = {
-	getNew: async (url, id) => {
+	getNew: async (url, id = "") => {
 		const article = uni.request({
 			url,
 			method: 'GET',

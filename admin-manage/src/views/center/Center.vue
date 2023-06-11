@@ -26,7 +26,7 @@
               status-icon
           >
             <el-form-item label="用户名" prop="nickname">
-              <el-input v-model="userForm.nickname"/>
+              <el-input v-model.trim="userForm.nickname"/>
             </el-form-item>
 
             <el-form-item label="性别" prop="gender">
@@ -44,7 +44,7 @@
               </el-select>
             </el-form-item>
             <el-form-item label="说明" prop="introduction">
-              <el-input v-model="userForm.introduction"
+              <el-input v-model.trim="userForm.introduction"
                         :autosize="{ minRows: 2, maxRows: 4 }"
                         type="textarea"
               />
