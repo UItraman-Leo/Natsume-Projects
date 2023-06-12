@@ -1,12 +1,14 @@
 <template>
+
 <div class="appBg">
+    <video src="../assets/Welcome/test.webm" autoplay loop ></video>
 </div>
   <div id="app">
     <el-row :gutter="0">
       <el-col :span="17">
-        <div class="exhibition">
+        <div class="exhibition" ref="exhibition"  :style="{ backgroundImage: `url(${imgUrl})` }">
             <div class="dailyWord">
-              <p>大师傅士大夫士大夫撒旦反反复复烦烦烦烦烦烦烦烦烦烦噢噢噢噢噢噢噢噢噢噢噢噢哦哦哦烦烦烦烦烦是</p>
+              <p>{{textData}}</p>
             </div>
         </div>
       </el-col>
@@ -32,14 +34,30 @@
   </div>
 </template>
 
-<script setup>
+<script setup >
 import Enroll from "@/components/login-enroll/Enroll.vue";
 import Login from "@/components/login-enroll/Login.vue";
-import {ref} from 'vue'
+import {ref,onMounted} from 'vue'
+const imgUrl = ref(null)
+const textData = ref()
+const data =[
+  {ad:'砍怪一二三四五，赚钱个十百千万装备回收秒到账，回收上万随便浪。贪玩蓝月你想象不到的赚钱游戏，进来就赚钱，和巨星一起玩贪玩，是兄弟就来一起砍我'},
+  {ad:'过年有点闲，进服赚大钱。这句话可算是直接明了的说明了进服就能赚钱的，有心动的小伙伴抓紧时间入座，一刀九九九不是梦；美滋滋过大年。你还在等什么？'},
+  {ad:'其实我之前是拒绝拍这个传奇游戏广告的，后来我试玩了一下，哇，爆率真的很高，还送VIP，装备都是BlingBling的，忙的时候还可以离线挂机，现在每天带着成家班去攻沙。哇，好热血，蛮好玩的'},
+  {ad:'大扎好，我系轱天乐，我四渣渣辉，探挽懒月，介四里没有挽过的船新版本，挤需体验三番钟，里造会干我一样，爱象节款游戏。介晚的传奇，我就系你的兄弟。'},
+  {ad:'这传奇没谁了,登录就送,很暴力BT,一切靠打。'},
+  {ad:'无需付费也能称霸游戏;开局送神装，升级快到上天;随时随地挂机一刀999级，装备全靠爆，这游戏3分钟上瘾。'},
+  {ad:'开局一只鲲，进化全靠吞'}
+]
 
-// 左侧每日一言和图片
 
-
+// 图片
+onMounted(()=>{
+  let bgRandom = Math.round(Math.random()*19+1)
+  let textRandom = Math.round(Math.random()*6)
+  imgUrl.value=require(`../assets/Welcome/${bgRandom}.jpg`)
+  textData.value = data[textRandom].ad
+})
 // 手风琴展开状态
 const activeName = ref('1')
 const contentChange = (res)=>{
@@ -52,10 +70,9 @@ const contentChange = (res)=>{
 <style lang="scss" scoped>
 .appBg{
   position:absolute;
+  overflow: hidden;
   height: 100%;
   width: 100%;
-  background:0 0 url("@/assets/Welcome/background.png") no-repeat;
-  background-size: cover;
 }
 #app{
   width: 1100px;
@@ -66,7 +83,6 @@ const contentChange = (res)=>{
   right: 0;
   top:0;
   bottom: 0;
-
   .el-row{
     width: 100%;
     height:100%;
@@ -74,8 +90,7 @@ const contentChange = (res)=>{
       .exhibition{
         min-height: 440px;
         border: 1px solid #545c64;
-        background:url("@/assets/Welcome/bg.jpg");
-        background-size: cover;
+        background-size: 100% 100%;
         display: flex;
         flex-direction: row-reverse;
         flex-wrap: nowrap;
@@ -87,8 +102,8 @@ const contentChange = (res)=>{
           writing-mode: vertical-rl;
           p{
             text-shadow:
-                -1px -1px 1px #07fcf4,
-            0px 4px 1px #2ec4bd,
+                -1px -1px 0px #07fcf4,
+            0px 4px 0px #2ec4bd,
             4px 4px 5px #1a817d,
             0px 0px 7px #04fca5;
             line-height: 30px;
