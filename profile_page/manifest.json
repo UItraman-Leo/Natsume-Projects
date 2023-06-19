@@ -80,7 +80,7 @@
 		"devServer": {
 			"proxy": {
 				"/web": {
-					"target": "http://127.0.0.1:3000",
+					"target": "https://api.xia-mu.top:3000",
 					"changeOrigin": true
 					// "pathRewrite": { // "pathRewrite"是必要的，不然读取不到数据
 					// 	"^/web": ""

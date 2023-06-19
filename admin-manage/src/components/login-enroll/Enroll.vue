@@ -65,7 +65,7 @@ const EnrollForm = reactive({
 const EnrollFormRules = reactive({
   nickname: [
     {required: true, message: '请输入用户名' },
-    {min: 1, max: 10, message: 'Length should be 1 to 10'},
+    {min: 1, max: 10, message: '昵称 1 to 10, Are you OK?'},
   ],
   username: [
     {required: true, message: '请输入账号'},

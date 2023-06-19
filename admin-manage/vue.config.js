@@ -5,12 +5,12 @@ module.exports = defineConfig({
     devServer: {
         proxy: {
             "/adminapi": {
-                target: "http://127.0.0.1:3000",
-                changeOrigin: true
+                target: "https://api.xia-mu.top:3000",
+                changeOrigin: true,
             },
             "/web": {
-                target: "http://127.0.0.1:3000",
-                changeOrigin: true
+                target: "https://api.xia-mu.top:3000",
+                changeOrigin: true,
             }
         }
 

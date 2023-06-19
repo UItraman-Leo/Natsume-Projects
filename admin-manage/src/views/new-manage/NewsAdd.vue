@@ -71,11 +71,11 @@ const newForm = reactive({
 const newFormRules = reactive({
   title: [
     {required: true, message: '标题', trigger: 'blur'},
-    {min: 1, max: 50, message: 'Length should be 1 to 50', trigger: 'blur'},
+    {min: 1, max: 100, message: '够了!够了!不要超过100个字符', trigger: 'blur'},
   ],
   content: [
     {required: true, message: '内容', trigger: 'blur'},
-    {min: 1, max: 99999, message: 'Length should be 1 to 99999', trigger: 'blur'},
+    {min: 1, max: 99999, message: '最多99999', trigger: 'blur'},
   ],
   category: [
     {required: true, message: '性别', trigger: 'blur'},

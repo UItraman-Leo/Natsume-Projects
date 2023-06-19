@@ -1,7 +1,7 @@
 <template>
 
 <div class="appBg">
-    <video src="../assets/Welcome/test.webm" autoplay loop ></video>
+<!--    <video src="../assets/Welcome/test.webm" autoplay loop ></video>-->
 </div>
   <div id="app">
     <el-row :gutter="0">
@@ -73,6 +73,7 @@ const contentChange = (res)=>{
   overflow: hidden;
   height: 100%;
   width: 100%;
+  background-image: linear-gradient(25deg, #f9436d, #ff8c7b, #ffc689, #fffd97)
 }
 #app{
   width: 1100px;

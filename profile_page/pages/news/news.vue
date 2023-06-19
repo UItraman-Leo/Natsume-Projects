@@ -23,7 +23,7 @@
 						</view>
 					</template>
 					<image style="width: 100%;" lazy-load="true" mode="widthFix"
-						:src="'http://localhost:3000'+item.cover" @click="open(item)">
+						:src="'https://api.xia-mu.top:3000'+item.cover" @click="open(item)">
 					</image>
 				</uni-card>
 
@@ -72,7 +72,7 @@
 		},
 		methods: {
 			onSwitch(item) { // 点击切换获取文章数据
-				$axios.getNew('http://127.0.0.1:3000/web/new/list', item).then((res) => {
+				$axios.getNew('https://api.xia-mu.top:3000/web/new/list', item).then((res) => {
 					// console.log('11111', res.data.data);
 					if (res.data.data !== []) {
 						// console.log('222', res.data.data);
@@ -95,7 +95,7 @@
 			},
 		},
 		onLoad() {
-			$axios.getNew('http://127.0.0.1:3000/web/new/list', this.radio).then((res) => {
+			$axios.getNew('https://api.xia-mu.top:3000/web/new/list', this.radio).then((res) => {
 				// console.log('11111', res.data.data);
 				if (res.data.data !== []) {
 					this.article_Data = res.data.data

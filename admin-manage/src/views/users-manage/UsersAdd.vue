@@ -96,11 +96,11 @@ const userAddFormRules = reactive({
   ],
   username: [
     {required: true, message: '用户名', trigger: 'blur'},
-    {min: 1, max: 10, message: 'Length should be 1 to 10', trigger: 'blur'},
+    {min: 5, max: 15, message: 'Length should be 5 to 15', trigger: 'blur'},
   ],
   password: [
     {required: true, message: '密码', trigger: 'blur'},
-    {min: 1, max: 10, message: 'Length should be 1 to 10', trigger: 'blur'},
+    {min: 5, max: 15, message: 'Length should be 5 to 15', trigger: 'blur'},
   ],
   role: [
     {required: true, message: '权限', trigger: 'blur'},

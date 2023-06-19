@@ -1,20 +1,20 @@
 <template>
-  <div>
-    <el-card shadow="always">
-      <el-table :data="tableData" max-height=80vh style="width: 100%">
-        <el-table-column fixed label="姓名" prop="nickname" width="150"/>
-        <el-table-column label="头像" width="100">
+
+    <el-card shadow="always" style="width: 65vmax;margin: auto">
+      <el-table :data="tableData" max-height=80vh>
+        <el-table-column fixed label="姓名" prop="nickname" width="180"/>
+        <el-table-column label="头像" width="150">
           <template #default="scope">
             <div style="display: flex; align-items: center">
               <el-avatar :size="30"
-                         :src="scope.row.avatar?`http://localhost:3000${scope.row.avatar}`
-                         :'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'"
+                         :src="scope.row.avatar?`https://api.xia-mu.top:3000${scope.row.avatar}`
+                         :'https://i.postimg.cc/xCcNTnNK/apple-touch-icon.png'"
               />
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="用户名" prop="username" width="200"/>
-        <el-table-column label="权限" width="120">
+        <el-table-column label="用户名" prop="username" width="180"/>
+        <el-table-column label="权限" width="150">
           <template #default="scope">
             <div style="display: flex; align-items: center">
 
@@ -27,14 +27,14 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="性别" prop="gender" width="120">
+        <el-table-column label="性别" prop="gender" width="150">
           <template #default="scope">
             <div style="display: flex; align-items: center">
-              {{ scope.row.gender === 0 ? '人妖' : scope.row.gender === 1 ? '男' : '女' }}
+              {{ scope.row.gender === 1 ? '男' : scope.row.gender === 2 ? '女' : '泰国来的' }}
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="时间" prop="date" width="300"/>
+<!--        <el-table-column label="时间" prop="date" width="300"/>-->
         <el-table-column fixed="right" label="操作" width="140">
           <template #default="scope">
             <el-button size="small" @click="handleEdit(scope.row)"
@@ -102,7 +102,6 @@
       </span>
       </template>
     </el-dialog>
-  </div>
 </template>
 
 <script setup>

@@ -1,72 +1,72 @@
 <template>
 	<!--音频组件-->
-	<view>
-		<view class="xm-music-player">
 
-			<view class="search-list">
-				<!-- 列表容器 -->
-				<view>
-					<!-- 列表项 -->
-					<view class="song" v-for="(item,index) in list" :key="index" @click="clickCut({item,index})">
+	<view class="xm-music-player">
 
-						<view class="song_title">
-							{{item.name}}
-						</view>
-						<view class="singer_name">
-							{{item.artists}}
-						</view>
-						<view class="profile_photo">
-							{{item.duration}}
-						</view>
+		<view class="search-list">
+			<!-- 列表容器 -->
+			<view>
+				<!-- 列表项 -->
+				<view class="song" v-for="(item,index) in list" :key="index" @click="clickCut({item,index})">
+
+					<view class="song_title">
+						{{item.name}}
 					</view>
-					<!-- 列表项 -->
+					<view class="singer_name">
+						{{item.artists}}
+					</view>
+					<view class="profile_photo">
+						点击播放
+					</view>
 				</view>
-				<!-- 列表容器 -->
+				<!-- 列表项 -->
 			</view>
+			<!-- 列表容器 -->
+		</view>
 
-			<view class="audo-video">
+		<view class="audo-video">
 
-				<!--音频播放按钮处-->
-				<view class="audo-top">
-					<!--上一首切换按钮-->
-					<image v-if="jian" style="width:50rpx;height:50rpx;" @click="nosig" src="/static/sys.png"
-						mode="aspectFill"></image>
-					<image v-else @click="sig" src="/static/xys.png"
-						style="width:50rpx;height:50rpx;transform:rotate(180deg)" mode="aspectFill"></image>
-					<!--上一首切换按钮-->
-					<!--播放按钮-->
-					<image :src="succes?'/static/bofang2.png':'/static/zt.png'" mode="aspectFill"
-						style="width:180rpx;height:180rpx;" @click="plays()"></image>
-					<!--播放按钮-->
-					<!--下一首切换按钮-->
-					<image v-if="jia" @click="noxig" style="width:50rpx;height:50rpx;transform:rotate(180deg)"
-						src="/static/sys.png" mode="aspectFill"> </image>
-					<image v-else style="width:50rpx;height:50rpx;" src="/static/xys.png" @click="xig"
-						mode="aspectFill"></image>
-					<!--下一首切换按钮-->
+			<!--音频播放按钮处-->
+			<view class="audo-top">
+				<!--上一首切换按钮-->
+				<image v-if="jian" style="width:50rpx;height:50rpx;" @click="nosig" src="/static/sys.png"
+					mode="aspectFill"></image>
+				<image v-else @click="sig" src="/static/xys.png"
+					style="width:50rpx;height:50rpx;transform:rotate(180deg)" mode="aspectFill"></image>
+				<!--上一首切换按钮-->
+				<!--播放按钮-->
+				<image :src="succes?'/static/bofang2.png':'/static/zt.png'" mode="aspectFill"
+					style="width:180rpx;height:180rpx;" @click="plays()"></image>
+				<!--播放按钮-->
+				<!--下一首切换按钮-->
+				<image v-if="jia" @click="noxig" style="width:50rpx;height:50rpx;transform:rotate(180deg)"
+					src="/static/sys.png" mode="aspectFill"> </image>
+				<image v-else style="width:50rpx;height:50rpx;" src="/static/xys.png" @click="xig" mode="aspectFill">
+				</image>
+				<!--下一首切换按钮-->
+			</view>
+			<!--音频播放按钮处-->
+			<!--音频api处[视频代替音频-实现倍数功能]-->
+			<video id="myVideo" ref="myVideo" :src="recorPath" class="hidden" :autoplay="autoplays"
+				@timeupdate="timeupdate" @loadedmetadata="loadedmetadata" @ended="next" controls
+				auto-pause-if-navigate="false" auto-pause-if-open-native="false" http-cache="true" is-live="true">
+			</video>
+			<!--音频api处[视频代替音频-实现倍数功能]-->
+			<view class="audo-a" style="margin:0 auto;">
+				<!--进度条-->
+				<view class="slider-box">
+					<text class="mm">{{timer}}</text>
+					<slider style="width: 370rpx;" @change="sliderChange" @changing="sliderChanging"
+						class="audio-slider" block-size="16" :min="0" :max="duration" :value="currentTime"
+						activeColor="#FFA929" @touchstart="lock= true" @touchend="lock = false" />
+					<text class="ss" v-if="overTimer!='NaN:NaN'">{{overTimer}}</text>
+					<text class="ss" v-else>00.00</text>
 				</view>
-				<!--音频播放按钮处-->
-				<!--音频api处[视频代替音频-实现倍数功能]-->
-				<video id="myVideo" ref="myVideo" :src="recorPath" class="hidden" :autoplay="autoplays"
-					@timeupdate="timeupdate" @loadedmetadata="loadedmetadata" @ended="next" controls
-					auto-pause-if-navigate="false" auto-pause-if-open-native="false">
-				</video>
-				<!--音频api处[视频代替音频-实现倍数功能]-->
-				<view class="audo-a" style="margin:0 auto;">
-					<!--进度条-->
-					<view class="slider-box">
-						<text class="mm">{{timer}}</text>
-						<slider style="width: 370rpx;" @change="sliderChange" @changing="sliderChanging"
-							class="audio-slider" block-size="16" :min="0" :max="duration" :value="currentTime"
-							activeColor="#FFA929" @touchstart="lock= true" @touchend="lock = false" />
-						<text class="ss" v-if="overTimer!='NaN:NaN'">{{overTimer}}</text>
-						<text class="ss" v-else>00.00</text>
-					</view>
-					<!--进度条-->
-				</view>
+				<!--进度条-->
 			</view>
 		</view>
 	</view>
+
 </template>
 
 <script>
@@ -85,6 +85,14 @@
 			list: { //音频数据
 				Type: Array,
 				default: () => []
+			},
+			sourceValue: { //当前选择的歌源
+				Type: Number,
+				default: 1
+			},
+			searchValue: { //搜索框的内容，为个别歌源使用
+				Type: String,
+				default: ''
 			},
 			autoNext: {
 				Type: Boolean,
@@ -120,24 +128,59 @@
 		methods: {
 			clickCut(e) { //选择列表歌曲
 				this.num = e.index
-				// 通过e.item.id获取MP3格式的url，获取完后再继续执行
-				Resource1.getMP3(e.item.id).then((data) => {
-					//通过获取的url给recorPath，随后执行播放
-					this.recorPath = data.data.data[0].url
-					this.succes = true
-					this.videoContext.play()
-					if (this.num == 0) {
-						this.jia = false
-						this.jian = true
-					} else if (this.num + 1 >= this.list.length) {
-						this.jia = true
-						this.jian = false
-					} else {
-						this.jia = false
-						this.jian = false
+				// 通过e.item.id获取MP3格式的url
+				switch (this.sourceValue) {
+					case 0:
+						Resource1.getMP3_1(e.item.id).then((data) => {
+							//通过获取的url给recorPath，随后执行播放
+							this.recorPath = data.data.data[0].url
+						});
+						break;
+					case 1:
+						Resource1.getMP3_1(e.item.id).then((data) => {
+							this.recorPath = data.data.data[0].url
+						});
+						break;
+					case 2:
+						Resource1.getMP3_2('qq', this.searchValue, Number(e.item.id)).then((data) => {
+							// console.log(data.data.match(/播放链接：(\S*)/)[1]);
+							this.recorPath = data.data.match(/播放链接：(\S*)/)[1]
+						});
+						break;
+					case 3:
+						Resource1.getMP3_2('kgmv', this.searchValue, Number(e.item.id)).then((data) => {
 
-					}
-				})
+							this.recorPath = data.data.match(/播放链接：(\S*)/)[1]
+						});
+						break;
+					case 4:
+						Resource1.getMP3_3(e.item.id).then((data) => {
+							this.recorPath = data.data.data.songSource
+						});
+						break;
+					case 5:
+						Resource1.getMP3_3(e.item.id).then((data) => {
+							this.recorPath = data.data.data.songSource
+						});
+						break;
+
+				}
+				// 获取完资源后再继续执行
+				this.succes = true
+				setTimeout(() => {
+					this.videoContext.play()
+				}, 100)
+				if (this.num == 0) {
+					this.jia = false
+					this.jian = true
+				} else if (this.num + 1 >= this.list.length) {
+					this.jia = true
+					this.jian = false
+				} else {
+					this.jia = false
+					this.jian = false
+				}
+
 			},
 			plays() { //播放暂停
 				if (!this.list || this.list.length == 0) {
@@ -213,18 +256,50 @@
 					this.jian = true // 上按钮-灰且阻止
 					this.jia = false // 下按钮-亮且可点击
 				}
-				Resource1.getMP3(this.list[this.num].id).then((data) => {
-					// 获取需要发送的url,发送请求获取歌曲资源
-					this.recorPath = data.data.data[0].url
-					if (this.switAud) { //切换时是否默认开启播放
-						this.succes = true
-						setTimeout(() => {
-							this.videoContext.play()
-						}, 100)
-					} else {
-						this.succes = false
-					}
-				})
+				switch (this.sourceValue) {
+					case 0:
+						Resource1.getMP3_1(this.list[this.num].id).then((data) => {
+							//通过获取的url给recorPath，随后执行播放
+							this.recorPath = data.data.data[0].url
+						});
+						break;
+					case 1:
+						Resource1.getMP3_1(this.list[this.num].id).then((data) => {
+							this.recorPath = data.data.data[0].url
+						});
+						break;
+					case 2:
+						Resource1.getMP3_2('qq', this.searchValue, Number(this.list[this.num].id)).then((data) => {
+							// console.log(data.data.match(/播放链接：(\S*)/)[1]);
+							this.recorPath = data.data.match(/播放链接：(\S*)/)[1]
+						});
+						break;
+					case 3:
+						Resource1.getMP3_2('kgmv', this.searchValue, Number(this.list[this.num].id)).then((data) => {
+							this.recorPath = data.data.match(/播放链接：(\S*)/)[1]
+						});
+						break;
+					case 4:
+						Resource1.getMP3_3(this.list[this.num].id).then((data) => {
+							this.recorPath = data.data.data.songSource
+						});
+						break;
+					case 5:
+						Resource1.getMP3_3(this.list[this.num].id).then((data) => {
+							this.recorPath = data.data.data.songSource
+						});
+						break;
+
+				}
+				// 获取完资源后继续执行
+				if (this.switAud) { //切换时是否默认开启播放
+					this.succes = true
+					setTimeout(() => {
+						this.videoContext.play()
+					}, 100)
+				} else {
+					this.succes = false
+				}
 			},
 			xig() { //下一首
 				if (!this.list || this.list.length == 0) {
@@ -243,18 +318,52 @@
 					this.jia = true //下按钮 - 灰且阻止
 					this.jian = false //上按钮 - 亮可点击
 				}
-				Resource1.getMP3(this.list[this.num].id).then((data) => {
-					// 获取需要发送的url,发送请求获取歌曲资源
-					this.recorPath = data.data.data[0].url
-					if (this.switAud) { //切换时是否默认开启播放
-						this.succes = true
-						setTimeout(() => {
-							this.videoContext.play()
-						}, 100)
-					} else {
-						this.succes = false
-					}
-				})
+				// 获取需要发送的url,发送请求获取歌曲资源
+				switch (this.sourceValue) {
+					case 0:
+						Resource1.getMP3_1(this.list[this.num].id).then((data) => {
+							//通过获取的url给recorPath，随后执行播放
+							this.recorPath = data.data.data[0].url
+						});
+						break;
+					case 1:
+						Resource1.getMP3_1(this.list[this.num].id).then((data) => {
+							this.recorPath = data.data.data[0].url
+						});
+						break;
+					case 2:
+						Resource1.getMP3_2('qq', this.searchValue, Number(this.list[this.num].id)).then((data) => {
+							// console.log(data.data.match(/播放链接：(\S*)/)[1]);
+							this.recorPath = data.data.match(/播放链接：(\S*)/)[1]
+						});
+						break;
+					case 3:
+						Resource1.getMP3_2('kgmv', this.searchValue, Number(this.list[this.num].id)).then((data) => {
+							this.recorPath = data.data.match(/播放链接：(\S*)/)[1]
+						});
+						break;
+					case 4:
+						Resource1.getMP3_3(this.list[this.num].id).then((data) => {
+							this.recorPath = data.data.data.songSource
+						});
+						break;
+					case 5:
+						Resource1.getMP3_3(this.list[this.num].id).then((data) => {
+							this.recorPath = data.data.data.songSource
+						});
+						break;
+
+				}
+
+				// 获取完资源后再继续执行
+				if (this.switAud) { //切换时是否默认开启播放
+					this.succes = true
+					setTimeout(() => {
+						this.videoContext.play()
+					}, 100)
+				} else {
+					this.succes = false
+				}
 			},
 			nosig() {
 				uni.showToast({
@@ -277,13 +386,48 @@
 				if (this.num + 1 < this.list.length) {
 					this.succes = true
 					this.num += 1
-					Resource1.getMP3(this.list[this.num].id).then((data) => {
-						// 获取需要发送的url,发送请求获取歌曲资源
-						this.recorPath = data.data.data[0].url
-						setTimeout(() => {
-							this.videoContext.play()
-						}, 100)
-					})
+					// 获取需要发送的url,发送请求获取歌曲资源
+					switch (this.sourceValue) {
+						case 0:
+							Resource1.getMP3_1(this.list[this.num].id).then((data) => {
+								//通过获取的url给recorPath，随后执行播放
+								this.recorPath = data.data.data[0].url
+							});
+							break;
+						case 1:
+							Resource1.getMP3_1(this.list[this.num].id).then((data) => {
+								this.recorPath = data.data.data[0].url
+							});
+							break;
+						case 2:
+							Resource1.getMP3_2('qq', this.searchValue, Number(this.list[this.num].id)).then((data) => {
+								// console.log(data.data.match(/播放链接：(\S*)/)[1]);
+								this.recorPath = data.data.match(/播放链接：(\S*)/)[1]
+							});
+							break;
+						case 3:
+							Resource1.getMP3_2('kgmv', this.searchValue, Number(this.list[this.num].id)).then((data) => {
+								this.recorPath = data.data.match(/播放链接：(\S*)/)[1]
+							});
+							break;
+						case 4:
+							Resource1.getMP3_3(this.list[this.num].id).then((data) => {
+								this.recorPath = data.data.data.songSource
+							});
+							break;
+						case 5:
+							Resource1.getMP3_3(this.list[this.num].id).then((data) => {
+								this.recorPath = data.data.data.songSource
+							});
+							break;
+
+					}
+
+
+					// 获取完资源后再继续执行
+					setTimeout(() => {
+						this.videoContext.play()
+					}, 100)
 				} else {
 					this.jia = true //下按钮 - 灰且阻止
 					this.jian = false //上按钮 - 亮可点击
@@ -319,8 +463,9 @@
 <style lang="scss" scoped>
 	// 主区
 	.xm-music-player {
+		position: relative;
 		width: 100%;
-		height: 80%;
+		height: 100%;
 		display: flex;
 		flex-direction: column;
 		flex-wrap: nowrap;
@@ -328,11 +473,7 @@
 
 		// 列表区域
 		.search-list {
-			// #ifdef H5
-			width: 70%;
-			margin: auto;
-			// #endif
-			height: 65vh;
+			height: 80rem;
 			overflow-y: scroll;
 			background-image: url("/static/aa.png");
 			background-position: center;
@@ -355,14 +496,22 @@
 
 				// 歌名
 				.song_title {
-					margin: auto;
+					margin: auto auto auto 10px;
+					width: 8rem;
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
 					font-size: 26rpx;
 					color: #546e7a;
 				}
 
 				// 歌手名
 				.singer_name {
-					margin: auto;
+					margin: auto auto auto 100rpx;
+					width: 4rem;
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
 					font-size: 26rpx;
 					color: #546e7a;
 				}
@@ -371,8 +520,9 @@
 
 		// 控件区域
 		.audo-video {
-			background-color: #9e9e9e;
-			padding-bottom: 20rpx;
+			height: 20rem;
+			// background-image: linear-gradient(358deg, #06fff4, #a7f3bb, #dce681, #ffd83c);
+			background-image: linear-gradient(359deg, #7c9ce6, #6fbdeb, #57deef, #08fff3);
 			color: #fff;
 		}
 	}

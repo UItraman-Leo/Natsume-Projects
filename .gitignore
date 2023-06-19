@@ -1,8 +1,10 @@
 .DS_Store
 node_modules
-/dist
+dist
 unpackage
-/config
+config
+newuploads
+uploads
 # local env files
 .env.local
 .env.*.local

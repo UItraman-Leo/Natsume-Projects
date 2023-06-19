@@ -61,17 +61,17 @@ const url = '/adminapi/product/add'
 // 表单规则
 const ProductAddFormRules = reactive({
   name: [
-    {required: true, message: '昵称', trigger: 'blur'},
+    {required: true, message: '名字', trigger: 'blur'},
     {min: 1, max: 30, message: 'Length should be 1 to 30', trigger: 'blur'},
   ],
   grouping: [
-    {required: true, message: '用户名', trigger: 'blur'},
+    {required: true, message: '分组', trigger: 'blur'},
   ],
   img: [
-    {required: true, message: '权限', trigger: 'blur'},
+    {required: true, message: '图片', trigger: 'blur'},
   ],
   Link: [
-    {required: true, message: '密码', trigger: 'blur'},
+    {required: true, message: '链接', trigger: 'blur'},
   ]
 })
 const options = [

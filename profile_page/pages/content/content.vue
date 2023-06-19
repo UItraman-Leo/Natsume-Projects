@@ -78,10 +78,13 @@
 
 		},
 		onLoad() {
-			$axios.getNew('http://127.0.0.1:3000/web/content/list').then((res) => {
+			$axios.getNew('https://api.xia-mu.top:3000/web/content/list').then((res) => {
+				console.log('#######res', res);
 				let arry = res.data.data
 				this.nav_Data = groupBy(arry)
 				// console.log(">>>", groupBy(arry));
+			}).catch((erro) => {
+				console.log('###########erro', erro);
 			})
 		}
 	}

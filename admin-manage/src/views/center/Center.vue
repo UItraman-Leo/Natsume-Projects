@@ -79,7 +79,7 @@ import Up_Load from '@/components/upload/Up_Load.vue'
 
 const store = useStore()
 // 头像，没有设置给默认
-const avatarUrl = computed(() => store.state.userInfo.avatar ? `http://localhost:3000${store.state.userInfo.avatar}` : "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png")
+const avatarUrl = computed(() => store.state.userInfo.avatar ? `https://api.xia-mu.top:3000${store.state.userInfo.avatar}` : "https://i.postimg.cc/xCcNTnNK/apple-touch-icon.png")
 
 // store里的信息
 const {nickname, gender, introduction, avatar, role} = store.state.userInfo

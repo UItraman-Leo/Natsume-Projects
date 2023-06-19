@@ -52,8 +52,8 @@ const clickCollapse = () => {
 }
 const avatarUrl = computed(() =>
     store.state.userInfo.avatar ?
-        `http://localhost:3000${store.state.userInfo.avatar}` :
-        "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png")
+    `https://api.xia-mu.top:3000${store.state.userInfo.avatar}` :
+    "https://i.postimg.cc/xCcNTnNK/apple-touch-icon.png")
 // 右侧下拉内容
 // 1.个人中心
 const clickCenter = () => {

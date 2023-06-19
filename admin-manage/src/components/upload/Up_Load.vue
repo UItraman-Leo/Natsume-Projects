@@ -27,7 +27,7 @@ const props = defineProps({
 const emit = defineEmits(["uploadChange"])
 
 const loadAvatarUrl = computed(() => {
-  return props.avatar.includes('blob') ? props.avatar : `http://localhost:3000${props.avatar}`
+  return props.avatar.includes('blob') ? props.avatar : `https://api.xia-mu.top:3000${props.avatar}`
 })
 // 每次选完图片的回调
 const onHandleChange = (e) => {

@@ -55,11 +55,11 @@ const LoginForm = reactive({//表单绑定的响应式对象
 const LoginFormRules = reactive({
   username: [
     {required: true, message: '请输入用户名'},
-    {min: 5, max: 15, message: 'Length should be 5 to 15'},
+    {min: 5, max: 15, message: '账号5-15个字符'},
   ],
   password: [
     {required: true, message: '请输入密码'},
-    {min: 5, max: 15, message: 'Length should be 5 to 15'},
+    {min: 5, max: 15, message: '密码5-15个字符'},
   ]
 })
 const disabled = ref(false)
