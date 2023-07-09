@@ -11,29 +11,42 @@
 	// },
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path": "pages/loading/loading",
+			"style": {
+				"navigationBarTitleText": "加载中",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "首页"
 			}
+
 		},
 		{
 			"path": "pages/content/content",
 			"style": {
 				"navigationBarTitleText": "导航"
 			}
+
 		},
 		{
 			"path": "pages/news/news",
 			"style": {
 				"navigationBarTitleText": "公告"
 			}
+
 		},
 		{
 			"path": "pages/music/music",
 			"style": {
 				"navigationBarTitleText": "音乐搜索"
 			}
-		}, {
+
+		},
+		{
 			"path": "components/particulars/particulars",
 			"style": {
 				"navigationBarTitleText": "",
@@ -44,6 +57,7 @@
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
+		"dynamicRpx": true,
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
 		"h5": {
@@ -54,7 +68,7 @@
 		"backgroundColor": "#9ebfbf",
 		"list": [{
 			"pagePath": "pages/index/index",
-			"text": "首页"
+			"text": "机器人"
 		}, {
 			"pagePath": "pages/content/content",
 			"text": "导航"
