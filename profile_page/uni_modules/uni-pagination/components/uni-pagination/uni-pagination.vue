@@ -278,7 +278,7 @@
 						} else {
 							this.currentIndex += 5
 						}
-						return
+
 					}
 				}
 			},
