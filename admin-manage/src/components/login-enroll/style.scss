@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css?family=Lobster");
+
+$ruler: 16px;
+$color-red: #ae1100;
+$color-bg: #ebecf0;
+$color-shadow: #babecc;
+$color-white: #fff;
+.Login, .Enroll {
+  position: relative;
+  height: 100%;
+  background-color: $color-bg;
+
+  p {
+    font-family: "Lobster";
+    font-size: 2rem;
+  }
+
+  //标题
+  .title {
+    color: $color-shadow;
+    font-family: "Lobster";
+    font-size: 3.5em;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  //表单
+  .EnrollForm, .LoginForm {
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // 输入框、按钮共有样式
+    button,
+    ::v-deep(.el-input__wrapper) {
+      margin: 10px;
+      border: 0;
+      outline: 0;
+      font-size: $ruler;
+      border-radius: $ruler * 20;
+      padding: $ruler;
+      background-color: $color-bg;
+      text-shadow: 1px 1px 0 $color-white;
+    }
+
+    // 输入框样式
+    ::v-deep(.el-input__wrapper) {
+      margin-right: $ruler/2;
+      box-shadow: inset 2px 2px 5px $color-shadow, inset -5px -5px 10px $color-white;
+      width: 100%;
+      box-sizing: border-box;
+      transition: all 0.2s ease-in-out;
+      appearance: none;
+
+      &:hover {
+        box-shadow: inset 1px 1px 2px $color-shadow,
+        inset -1px -1px 2px $color-white;
+      }
+
+    }
+
+    // 按钮样式
+    button {
+      color: #61677c;
+      box-shadow: -5px -5px 20px $color-white, 5px 5px 20px $color-shadow;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      font-weight: 600;
+      display: block;
+      width: 50%;
+      height: 4*$ruler;
+      margin: auto;
+      line-height: $ruler;
+      color: $color-red;
+
+      &:hover {
+        box-shadow: -2px -2px 5px $color-white, 2px 2px 5px $color-shadow;
+      }
+
+      &:active {
+        box-shadow: inset 1px 1px 2px $color-shadow,
+        inset -1px -1px 2px $color-white;
+      }
+
+    }
+
+  }
+}

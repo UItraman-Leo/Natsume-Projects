@@ -1,7 +1,7 @@
 <template>
   <div class="Enroll">
     <div class="title">
-      <p>注册</p>
+      <p>registered</p>
     </div>
     <el-form
         ref="EnrollFormRef"
@@ -40,10 +40,11 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" round size="100px" :disabled="disabled" @click="submitForm(EnrollFormRef)">
-         注册
-        </el-button>
-
+        <button type="button" @click="submitForm(EnrollFormRef)">
+          <p>
+            registered
+          </p>
+        </button>
       </el-form-item>
     </el-form>
   </div>
@@ -119,32 +120,5 @@ setTimeout(()=>{
 
 
 <style lang="scss" scoped>
-.Enroll {
-  position:relative;
-  //标题
-  .title{
-    width: 100%;
-    height: 85px;
-    background: 120px -20px url("https://i.postimg.cc/8ChzHzM0/aigei-com.gif") no-repeat;
-
-    p{
-      font-family: cursive;
-      font-size: 3.5em;
-      font-weight: bold;
-      text-align:center;
-    }
-  }
-  //表单
-  .EnrollForm {
-    padding: 0;
-    .el-input{
-      margin: 5px 20px 5px 20px;
-    }
-    .el-button{
-      width: 100%;
-      margin: 3px 30px 0 30px;
-    }
-  }
-}
-
+@import "./style.scss"
 </style>

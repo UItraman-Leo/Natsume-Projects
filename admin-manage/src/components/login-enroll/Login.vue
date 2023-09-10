@@ -1,7 +1,7 @@
 <template>
   <div class="Login">
     <div class="title">
-        <p>登录</p>
+      <p>Sign up</p>
     </div>
     <el-form
         ref="LoginFormRef"
@@ -10,10 +10,11 @@
         class="LoginForm"
         label-width="auto"
         status-icon
+        @keyup.enter.native="submitForm(LoginFormRef)"
     >
       <el-form-item prop="username">
         <el-input
-            placeholder="账号"
+            placeholder="Email Address"
             v-model.trim="LoginForm.username"
             autocomplete="off"
             type="text"
@@ -22,7 +23,7 @@
 
       <el-form-item prop="password">
         <el-input
-            placeholder="密码"
+            placeholder="Password"
             v-model.trim="LoginForm.password"
             autocomplete="off"
             type="password"
@@ -30,9 +31,9 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" round :disabled="disabled" size="100px" @click="submitForm(LoginFormRef)">
-          登录
-        </el-button>
+        <button type="button">
+          <p @click="submitForm(LoginFormRef)">Login</p>
+        </button>
 
       </el-form-item>
     </el-form>
@@ -98,47 +99,12 @@ const submitForm = () => {
   setTimeout(()=>{
     disabled.value = false
   },2000)
-}
 
+}
 
 </script>
 
 
 <style lang="scss" scoped>
-//登录
-.Login {
-  position:relative;
-  //标题
-  .title{
-    width: 100%;
-    height: 100px;
-    background: 120px 0 url("https://i.postimg.cc/8ChzHzM0/aigei-com.gif") no-repeat;
-    //margin-top: 6px;
-    p{
-      font-family: cursive;
-      font-size: 3.5em;
-      font-weight: bold;
-      text-align:center;
-    }
-  }
-  //表单
-  .LoginForm {
-    padding: 0;
-    .el-input{
-      margin: 10px;
-    }
-    .el-button{
-      width: 100%;
-      margin: 14px 50px 14px 50px;
-    }
-  }
-}
-
-
-
-::v-deep( .el-form-item) {
-  //样式穿透 ::v-deep
-  //margin-bottom: 20px;
-
-}
+@import "./style.scss"
 </style>
