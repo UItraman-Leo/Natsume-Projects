@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div class="lg-box">
-      <Login/>
-      <!-- <Enroll /> -->
+      <!--      <Login/>-->
+      <Enroll/>
     </div>
   </div>
 </template>
