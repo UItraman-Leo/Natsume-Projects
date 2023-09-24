@@ -10,27 +10,13 @@ $color-white: #fff;
   height: 100%;
   background-color: $color-bg;
 
-  p {
-    font-family: "Lobster";
-    font-size: 2rem;
-  }
-
-  //标题
-  .title {
-    color: $color-shadow;
-    font-family: "Lobster";
-    font-size: 3.5em;
-    font-weight: bold;
-    text-align: center;
-  }
-
   //表单
   .EnrollForm, .LoginForm {
     padding: 0;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+
     // 输入框、按钮共有样式
     button,
     ::v-deep(.el-input__wrapper) {

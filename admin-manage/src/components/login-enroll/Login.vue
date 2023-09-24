@@ -1,8 +1,5 @@
 <template>
   <div class="Login">
-    <div class="title">
-      <p>Sign up</p>
-    </div>
     <el-form
         ref="LoginFormRef"
         :model="LoginForm"
@@ -32,7 +29,7 @@
 
       <el-form-item>
         <button type="button">
-          <p @click="submitForm(LoginFormRef)">Login</p>
+          <p @click="submitForm(LoginFormRef)">点击登录</p>
         </button>
 
       </el-form-item>
@@ -106,5 +103,10 @@ const submitForm = () => {
 
 
 <style lang="scss" scoped>
-@import "./style.scss"
+@import "./style.scss";
+
+.LoginForm {
+  display: flex;
+  justify-content: space-evenly;
+}
 </style>

@@ -1,8 +1,6 @@
 <template>
   <div class="Enroll">
-    <div class="title">
-      <p>registered</p>
-    </div>
+
     <el-form
         ref="EnrollFormRef"
         :model="EnrollForm"
@@ -42,7 +40,7 @@
       <el-form-item>
         <button type="button" @click="submitForm(EnrollFormRef)">
           <p>
-            registered
+            提交注册
           </p>
         </button>
       </el-form-item>
@@ -120,5 +118,9 @@ setTimeout(()=>{
 
 
 <style lang="scss" scoped>
-@import "./style.scss"
+@import "./style.scss";
+
+.EnrollForm {
+  justify-content: center;
+}
 </style>
