@@ -75,7 +75,7 @@ import {Upload} from '@element-plus/icons-vue'
 import {ElMessage} from 'element-plus'
 import Up_Load from '@/components/upload/Up_Load.vue'
 import upload from "@/util/upload";
-
+import limitsOfAuthority from "@/util/limitsOfAuthority";
 const userAddFormRef = ref()
 let userAddForm = reactive({
   nickname: "",
@@ -156,10 +156,14 @@ const handleChange = (e) => {
 // 添加
 const clickAdd = () => {
   userAddFormRef.value.validate(async (valid) => {
+    // console.log(role);
+    // 表单验证
     if (valid) {
+      // 权限验证
+      if (!limitsOfAuthority()) return
       await upload(url, userAddForm)
           .then((res) => {
-            // console.log(res)
+            console.log(res)
             if (res.data.ActionType === "OK") {
               ElMessage({
                 message: '添加成功',

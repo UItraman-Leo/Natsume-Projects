@@ -62,6 +62,8 @@ import upload from '@/util/upload'
 import Editor from '@/components/editor/Editor.vue'
 import axios from 'axios'
 import {useRouter,useRoute} from "vue-router"
+import limitsOfAuthority from "@/util/limitsOfAuthority";
+		 
 const router = useRouter()
 const route = useRoute()
 
@@ -133,6 +135,7 @@ const coverChange = (e) => {
 const clickUpload = () => {
   newFormRef.value.validate(async (valid) => {
     if (valid) {
+      if (!limitsOfAuthority()) return
       // console.log(newForm)
       await upload('/adminapi/new/list',newForm)
       router.back()

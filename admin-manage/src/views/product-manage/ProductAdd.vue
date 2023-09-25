@@ -49,7 +49,7 @@ import {ref, reactive} from 'vue'
 import {Upload} from '@element-plus/icons-vue'
 import {ElMessage} from 'element-plus'
 import axios from 'axios'
-
+import limitsOfAuthority from "@/util/limitsOfAuthority";
 const ProductAddFormRef = ref()
 let ProductAddForm = reactive({
   name: "",
@@ -92,6 +92,7 @@ const options = [
 const clickAdd = () => {
   ProductAddFormRef.value.validate(async (valid) => {
     if (valid) {
+      if (!limitsOfAuthority()) return
       // console.log("222",ProductAddForm)
       await axios.post('/adminapi/product/add', ProductAddForm)
           .then(res=>{

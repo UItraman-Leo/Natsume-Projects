@@ -16,6 +16,6 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(164, 241, 227, 0.85);
+  background-color: rgba(246, 246, 246, 0.85);
 }
 </style>

@@ -56,7 +56,8 @@ import upload from "@/util/upload"
 import Up_Load from '@/components/upload/Up_Load.vue'
 import {ElMessage} from 'element-plus'
 import Editor from '@/components/editor/Editor.vue'
-
+import limitsOfAuthority from "@/util/limitsOfAuthority";
+		 
 const newFormRef = ref()
 const newForm = reactive({
   title: "",
@@ -111,6 +112,7 @@ const coverChange = (e) => {
 const clickUpload = () => {
   newFormRef.value.validate(async (valid) => {
     if (valid) {
+      if (!limitsOfAuthority()) return
       // console.log(newForm)
       await upload('/adminapi/new/add', newForm)
           .then(res => {

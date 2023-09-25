@@ -5,7 +5,7 @@
         :default-active="route.fullPath"
         :router="true"
         active-text-color="#f48fb1"
-        background-color="#94efd8"
+        background-color="#c6f1e69d"
         class="el-menu"
         text-color="#111"
     >
@@ -84,7 +84,7 @@ const vAdmin = {
 
 <style lang="scss" scoped>
 .el-aside {
-  background-color: #94efd8;
+  background-color: #c6f1e69d;
   .el-menu{
     border: solid 0
   }

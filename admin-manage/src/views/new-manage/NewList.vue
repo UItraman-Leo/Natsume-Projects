@@ -63,6 +63,8 @@ import { Check, Close, Delete, Edit, Search,Promotion} from '@element-plus/icons
 import axios from "axios"
 import formatTime from "@/util/formatTime"
 import {useRouter} from "vue-router"
+import limitsOfAuthority from "@/util/limitsOfAuthority";
+		
 const router = useRouter()
 
 const tableData = ref([])
@@ -89,6 +91,7 @@ const getTableData = async ()=>{
 }
 // 切换发布开关，发送请求，修改状态
 const publishSwitch = async (item)=>{
+  if (!limitsOfAuthority()) return
   // console.log(item)
  await axios({
     url: `/adminapi/new/switch`,
@@ -112,6 +115,7 @@ const changeEdit = (item)=>{
 }
 //点击删除
 const changeDelete = async (_id)=>{
+  if (!limitsOfAuthority()) return
  const res = await axios.delete(`/adminapi/new/setDel/${_id}`)
   if (res.data.ActionType === 'OK'){
     await getTableData()

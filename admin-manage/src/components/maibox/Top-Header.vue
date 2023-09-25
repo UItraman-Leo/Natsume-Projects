@@ -53,7 +53,7 @@ const clickCollapse = () => {
 const avatarUrl = computed(() =>
     store.state.userInfo.avatar ?
     `https://api.xia-mu.top:3000${store.state.userInfo.avatar}` :
-    "https://i.postimg.cc/xCcNTnNK/apple-touch-icon.png")
+        "http://pic-cloud.xia-mu.top/img/wallpapers/1689584007_580e9129648659b5ef1b5dad9081645d.jpg")
 // 右侧下拉内容
 // 1.个人中心
 const clickCenter = () => {
@@ -75,7 +75,7 @@ const clickQuit = () => {
 .el-header {
   width: 100%;
   padding: 0;
-  background-color: #94efd8;
+  background-color: #c6f1e69d;
   display: flex;
 
   .left {
@@ -88,7 +88,7 @@ const clickQuit = () => {
     align-items: center;
 
     .is-Grid {
-      color: yellow;
+      color: rgb(255, 187, 0);
       font-size: 3rem;
       transition-duration: 500ms;
       cursor: pointer;

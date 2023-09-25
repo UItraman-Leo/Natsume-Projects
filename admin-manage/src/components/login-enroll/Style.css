@@ -1,22 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Lobster");
-
 .Login, .Enroll {
     position: relative;
     height: 100%;
     background-color: #ebecf0;
-}
-
-.Login p, .Enroll p {
-    font-family: "Lobster";
-    font-size: 2rem;
-}
-
-.Login .title, .Enroll .title {
-    color: #babecc;
-    font-family: "Lobster";
-    font-size: 3.5em;
-    font-weight: bold;
-    text-align: center;
 }
 
 .Login .EnrollForm, .Login .LoginForm, .Enroll .EnrollForm, .Enroll .LoginForm {
@@ -24,7 +10,6 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 .Login .EnrollForm button,

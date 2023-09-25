@@ -8,7 +8,8 @@
             <div style="display: flex; align-items: center">
               <el-avatar :size="30"
                          :src="scope.row.avatar?`https://api.xia-mu.top:3000${scope.row.avatar}`
-                         :'https://i.postimg.cc/xCcNTnNK/apple-touch-icon.png'"
+                         :'http://pic-cloud.xia-mu.top/img/wallpapers/1689584007_580e9129648659b5ef1b5dad9081645d.jpg'"
+                         
               />
             </div>
           </template>
@@ -75,8 +76,8 @@
         <el-form-item label="用户名" prop="username">
           <el-input v-model.trim="userAddForm.username"/>
         </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input v-model.trim="userAddForm.password"/>
+        <el-form-item v-if="role==0" label="密码" prop="password">
+          <el-input v-model.trim="userAddForm.password" disabled show-password/>
         </el-form-item>
         <el-form-item label="权限" prop="role">
           <el-select
@@ -109,9 +110,15 @@ import {InfoFilled} from '@element-plus/icons-vue'
 import {ElMessage} from 'element-plus'
 import {ref, reactive, onMounted} from 'vue'
 import axios from 'axios'
+import limitsOfAuthority from "@/util/limitsOfAuthority";
+import {useStore} from "vuex"
 
+const store = useStore()
+const {role} = store.state.userInfo
 const dialogFormVisible = ref(false)
 const userAddFormRef = ref()
+
+
 let userAddForm = reactive({
   nickname: "",
   username: "",
@@ -122,7 +129,7 @@ const tableData = ref([])
 // 表单规则
 const userFormRules = reactive({
   nickname: [
-    {required: true, message: '用户名', trigger: 'blur'},
+    {required: true, message: '昵称', trigger: 'blur'},
     {min: 1, max: 10, message: 'Length should be 1 to 10', trigger: 'blur'},
   ],
   username: [
@@ -179,6 +186,7 @@ const handleEdit = async (data) => {
 const onUpLoad = () => {
   userAddFormRef.value.validate(async (valid) => {
     if (valid) {
+      if (!limitsOfAuthority()) return
       // console.log(userAddForm)
       // 1.往后端发送数据
       const res = await axios.put(`/adminapi/user/put/${userAddForm._id}`, userAddForm)
@@ -201,6 +209,7 @@ const onUpLoad = () => {
 }
 // 删除用户
 const handleDelete = async (index, data) => {
+  if (!limitsOfAuthority()) return
   await axios({
     url: `/adminapi/user/list/${data._id}`,
     method: 'delete',

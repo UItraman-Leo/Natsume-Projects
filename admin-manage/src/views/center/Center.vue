@@ -11,8 +11,14 @@
           <el-avatar
               :size="100" :src='avatarUrl'
           />
-          <h3>用户名:{{ nickname }}</h3>
-          <h3>权限:{{ role===0?"管理员":role===1?"用户":"游客" }}</h3>
+          <div>
+            <h3>用户名:</h3>
+            <p>{{ nickname }}</p>
+          </div>
+          <div>
+            <h3>权限:</h3>
+            <p>{{ role === 0 ? "管理员" : role === 1 ? "用户" : "游客" }}</p>
+          </div>
         </el-card>
       </el-col>
       <el-col :span="16">
@@ -79,7 +85,10 @@ import Up_Load from '@/components/upload/Up_Load.vue'
 
 const store = useStore()
 // 头像，没有设置给默认
-const avatarUrl = computed(() => store.state.userInfo.avatar ? `https://api.xia-mu.top:3000${store.state.userInfo.avatar}` : "https://i.postimg.cc/xCcNTnNK/apple-touch-icon.png")
+const avatarUrl = computed(() => store.state.userInfo.avatar ?
+    `https://api.xia-mu.top:3000${store.state.userInfo.avatar}` :
+    "http://pic-cloud.xia-mu.top/img/wallpapers/1689584007_580e9129648659b5ef1b5dad9081645d.jpg")
+// 右侧下拉内容")
 
 // store里的信息
 const {nickname, gender, introduction, avatar, role} = store.state.userInfo
@@ -166,6 +175,16 @@ const clickUpload = () => {
 
   .box-card {
     text-align: center;
+
+    & div {
+      background-color: rgba(247, 247, 246, 0.96);
+      margin-top: 20px;
+
+      p {
+        font-size: 14px;
+        color: rgb(235, 92, 221);
+      }
+    }
   }
 }
 

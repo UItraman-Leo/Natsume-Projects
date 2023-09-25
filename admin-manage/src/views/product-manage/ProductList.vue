@@ -66,6 +66,7 @@ import {ref,onMounted,reactive} from "vue"
 import {Delete, Edit} from '@element-plus/icons-vue'
 import {ElMessage} from 'element-plus'
 import axios from "axios"
+import limitsOfAuthority from "@/util/limitsOfAuthority";
 const tableData = ref([])
 const dialogFormVisible = ref(false)
 const formLabelWidth = '140px'
@@ -126,6 +127,7 @@ const clickCancelTrevise = async ()=>{
 const clickCommiTrevise = async (item)=>{
   ProductListFormRef.value.validate(async (valid) => {
     if (valid) {
+      if (!limitsOfAuthority()) return
       await axios.put(`/adminapi/product/put/`, item)
           .then(async data=>{
             if (data.data.ActionType==="OK"){
@@ -149,6 +151,7 @@ const clickCommiTrevise = async (item)=>{
 
 //点击删除
 const changeDelete = async (_id)=>{
+  if (!limitsOfAuthority()) return
   const res = await axios.delete(`/adminapi/product/setDel/${_id}`)
   if (res.data.ActionType === 'OK'){
     await getTableData()
