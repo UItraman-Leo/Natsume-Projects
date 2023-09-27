@@ -7,6 +7,7 @@
   margin: 0;
   padding: 0;
   cursor: url("../public/lulu.ico"), default;
+  color-scheme: dark;
 }
 
 ::-webkit-scrollbar {

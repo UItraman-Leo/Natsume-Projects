@@ -27,4 +27,11 @@ import LeftAside from "@/components/maibox/Left-Aside.vue";
   height: 100%;
   overflow: hidden;
 }
+
+//.el-main{
+//  background-attachment: fixed;
+//  background-repeat: no-repeat;
+//  background-size: cover;
+//  background-image:url("http://pic-cloud.xia-mu.top/img/wallpapers/1689584007_e94e64579b68f246f160c42cb298c389.jpg");
+//}
 </style>

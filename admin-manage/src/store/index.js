@@ -9,6 +9,8 @@ export default createStore({
         isCollapse: false,
         // 用来存储用户信息
         userInfo: {},
+        //记录选用的颜色主题
+        ColorTheme: 0
     },
     getters: {},
     mutations: {
@@ -28,10 +30,14 @@ export default createStore({
         clearUserInfo(state) {
             state.userInfo = {}
         },
+        changeColorTheme(state, value) {
+            state.ColorTheme = value
+            // console.log('vuex',state, value)
+        }
     },
     actions: {},
     modules: {},
     plugins: [createPersistedState({
-        paths: ["isCollapse", "userInfo"] //控制哪些状态要持久化
+        paths: ["ColorTheme", "isCollapse", "userInfo"] //控制哪些状态要持久化
     })],
 })

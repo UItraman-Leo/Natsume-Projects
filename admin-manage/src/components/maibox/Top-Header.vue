@@ -1,7 +1,11 @@
 <template>
-  <el-header>
+  <el-header :style="{
+    'background-image': navImg.topColor
+  }">
     <div class="left">
-      <el-icon class="is-Grid" @click="clickCollapse">
+      <el-icon :style="{
+        'color':navImg.activeColor
+      }" class="is-Grid" @click="clickCollapse">
         <Grid/>
       </el-icon>
 <!--      <span>????后台管理</span>-->
@@ -17,15 +21,11 @@
             <el-dropdown-item :icon="Plus" @click="clickCenter">
               个人中心
             </el-dropdown-item>
-            <el-dropdown-item :icon="CirclePlusFilled">
-              啥也没有
+            <ul @click="ToggleColors">
+              <el-dropdown-item v-for="(item,index) in bgImg" :key="index" :data-index='index'>
+                {{ item.name }}
             </el-dropdown-item>
-            <el-dropdown-item :icon="CirclePlus">
-              啥也没有
-            </el-dropdown-item>
-            <el-dropdown-item :icon="Check">
-              啥也没有
-            </el-dropdown-item>
+            </ul>
             <el-dropdown-item :icon="CircleCheck" @click="clickQuit">
               退出登录
             </el-dropdown-item>
@@ -40,9 +40,10 @@
 
 <script setup>
 import {useStore} from 'vuex'
-import {Grid, Plus, CirclePlusFilled, CirclePlus, Check, CircleCheck} from '@element-plus/icons-vue'
+import {Grid, Plus, CircleCheck} from '@element-plus/icons-vue'
 import {useRouter} from 'vue-router'
-import {computed} from 'vue'
+import {computed, reactive} from 'vue'
+import colorArr from './color'
 
 const router = useRouter()
 const store = useStore()
@@ -68,16 +69,22 @@ const clickQuit = () => {
   router.push("/login")
 }
 
-// 右侧下拉内容
+// 切换颜色
+const bgImg = reactive(colorArr)
+const ToggleColors = (e) => {
+  store.commit("changeColorTheme", e.target.dataset.index)
+  console.log(store.state.ColorTheme)
+}
+const navImg = computed(() => {
+  return bgImg[store.state.ColorTheme]
+})
 </script>
 
 <style lang="scss" scoped>
 .el-header {
   width: 100%;
   padding: 0;
-  background-color: #c6f1e69d;
   display: flex;
-
   .left {
     height: 100%;
     width: 50%;
@@ -88,7 +95,6 @@ const clickQuit = () => {
     align-items: center;
 
     .is-Grid {
-      color: rgb(255, 187, 0);
       font-size: 3rem;
       transition-duration: 500ms;
       cursor: pointer;
@@ -119,7 +125,6 @@ const clickQuit = () => {
       margin: 0 10px 0 30px;;
     }
   }
-
 }
 
 </style>

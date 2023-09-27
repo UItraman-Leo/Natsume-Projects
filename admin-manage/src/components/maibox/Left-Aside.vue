@@ -1,11 +1,15 @@
 <template>
-  <el-aside width="{{$store.state.isCollapse?63:200}}px">
+  <el-aside :style="{
+    'background-image': navImg.leftColor
+  }" width="{{$store.state.isCollapse?63:200}}px">
     <el-menu
+        :active-text-color=navImg.activeColor
+        :default-openeds="opends"
         :collapse="$store.state.isCollapse"
         :default-active="route.fullPath"
         :router="true"
-        active-text-color="#f48fb1"
-        background-color="#c6f1e69d"
+        background-color="#c6f1e600"
+        mode="vertical"
         class="el-menu"
         text-color="#111"
     >
@@ -70,6 +74,8 @@ import {
 } from '@element-plus/icons-vue';
 import {useRoute} from 'vue-router'
 import {useStore} from "vuex";
+import {computed, reactive} from "vue";
+import colorArr from "@/components/maibox/color";
 
 const store = useStore()
 const route = useRoute()
@@ -80,11 +86,16 @@ const vAdmin = {
     }
   }
 }
+const opends = reactive(["/user-manage", "/news-manage", "/product-manage"])
+// 修改颜色
+const bgImg = reactive(colorArr)
+const navImg = computed(() => {
+  return bgImg[store.state.ColorTheme]
+})
 </script>
 
 <style lang="scss" scoped>
 .el-aside {
-  background-color: #c6f1e69d;
   .el-menu{
     border: solid 0
   }
